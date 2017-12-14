@@ -9,9 +9,15 @@ router.get('/', function (req, res) {
 });
 
 router.get('/accidents', function (req, res){
-  var acci = features.getData();
-  var sorted = sorts.mergingSort(acci);
-  res.send(sorted);
+  // Check if the client asked for json
+  if (req.accepts('application/json')) {
+    var acci = features.getData();
+    var sorted = (req.query.sort === 'A') ? sorts.mergingSort(acci) : sorts.selectionSort(acci);
+    res.send(sorted);
+  }
+  else {
+    res.status(406).send({err: 'Not valid type for asked resource'});
+  }
 });
 
 module.exports = router;
