@@ -8,6 +8,13 @@ router.get('/', function (req, res) {
   res.send(features.getData())
 });
 
+router.get('/test-database', function (req, res) {
+  console.log('features : ');
+  var toto = require('../database/features');
+  console.log('features : '+toto);
+  res.send(toto)
+});
+
 router.get('/accidents', function (req, res){
   // Check if the client asked for json
   if (req.accepts('application/json')) {
