@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostsService } from './posts/posts.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { D3GraphComponent } from './d3-graph/d3-graph.component';
 
 
 
@@ -16,7 +17,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
   declarations: [
     AppComponent,
     PostsComponent,
-    NavBarComponent 
+    NavBarComponent,
+    D3GraphComponent 
   ],
   imports: [
     BrowserModule,
