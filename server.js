@@ -4,6 +4,8 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 
+var database = require('./server/database');
+
 // Get our API routes
 const api = require('./server/routes/api');
 
