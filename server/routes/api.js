@@ -3,6 +3,12 @@ const router = express.Router();
 var features = require('../services/features');
 var sorts = require('../services/sorts');
 
+let response = {
+  status: 200,
+  data: [],
+  message: null
+};
+
 /* GET api listing. */
 router.get('/', function (req, res) {
   res.send('toto')
@@ -35,5 +41,22 @@ router.get('/testSort', function(req, res){
   //console.log(sorted);
   res.send(sorted);
 })
+
+router.get('/posts', (req, res) => {
+  console.log("titi");
+  response.data.push(["titi"]);
+  response.data.push(["titi","tata"]);
+  res.json(response);
+
+});
+
+router.get('/toto', (req, res) => {
+  console.log("toto");
+  console.log(req.param('id'))
+  response.data.push(["titi"]);
+  response.data.push(["titi","tata"]);
+  res.json(response);
+
+});
 
 module.exports = router;
