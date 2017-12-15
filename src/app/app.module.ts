@@ -8,13 +8,15 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/posts.component';
 import { PostsService } from './posts/posts.service';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PostsComponent 
+    PostsComponent,
+    NavBarComponent 
   ],
   imports: [
     BrowserModule,
