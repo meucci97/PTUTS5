@@ -6,7 +6,7 @@
 exports.getData = function() {
   var data = [
     {
-      "num_acc" : 1,
+      "num_acc" : 20,
       "mois" : 1,
       "jour" : 1,
       "hrmn" : 1,
@@ -19,7 +19,7 @@ exports.getData = function() {
       "dep" : 1
     },
     {
-      "num_acc" : 1,
+      "num_acc" : 10,
       "mois" : 1,
       "jour" : 1,
       "hrmn" : 1,
@@ -32,7 +32,85 @@ exports.getData = function() {
       "dep" : 1
     },
     {
-      "num_acc" : 1,
+      "num_acc" : 15,
+      "mois" : 1,
+      "jour" : 1,
+      "hrmn" : 1,
+      "lum" : 1,
+      "isAgglo" : 1,
+      "inter" : 1,
+      "atm" : 1,
+      "col" : 1,
+      "com" : 1,
+      "dep" : 1
+    },
+    {
+      "num_acc" : 19,
+      "mois" : 1,
+      "jour" : 1,
+      "hrmn" : 1,
+      "lum" : 1,
+      "isAgglo" : 1,
+      "inter" : 1,
+      "atm" : 1,
+      "col" : 1,
+      "com" : 1,
+      "dep" : 1
+    },
+    {
+      "num_acc" : 150,
+      "mois" : 1,
+      "jour" : 1,
+      "hrmn" : 1,
+      "lum" : 1,
+      "isAgglo" : 1,
+      "inter" : 1,
+      "atm" : 1,
+      "col" : 1,
+      "com" : 1,
+      "dep" : 1
+    },
+    {
+      "num_acc" : 45,
+      "mois" : 1,
+      "jour" : 1,
+      "hrmn" : 1,
+      "lum" : 1,
+      "isAgglo" : 1,
+      "inter" : 1,
+      "atm" : 1,
+      "col" : 1,
+      "com" : 1,
+      "dep" : 1
+    },
+    {
+      "num_acc" : 2,
+      "mois" : 1,
+      "jour" : 1,
+      "hrmn" : 1,
+      "lum" : 1,
+      "isAgglo" : 1,
+      "inter" : 1,
+      "atm" : 1,
+      "col" : 1,
+      "com" : 1,
+      "dep" : 1
+    },
+    {
+      "num_acc" : 50,
+      "mois" : 1,
+      "jour" : 1,
+      "hrmn" : 1,
+      "lum" : 1,
+      "isAgglo" : 1,
+      "inter" : 1,
+      "atm" : 1,
+      "col" : 1,
+      "com" : 1,
+      "dep" : 1
+    },
+    {
+      "num_acc" : 15,
       "mois" : 1,
       "jour" : 1,
       "hrmn" : 1,
