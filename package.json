@@ -4,10 +4,10 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm run build & concurrently --kill-others \"npm run serve-api\" \"npm run serve\" & nodemon ./server.js ",
+    "start": "npm run build & concurrently --kill-others \"npm run serve-api\" \"npm run serve\"",
     "serve": "ng serve --host 0.0.0.0 --proxy-config proxy.conf.json",
     "build": "ng build --output-path=public",
-    "serve-api": "node server.js",
+    "serve-api": "nodemon ./server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

@@ -5,7 +5,7 @@ var sorts = require('../services/sorts');
 
 /* GET api listing. */
 router.get('/', function (req, res) {
-  res.send(features.getData())
+  res.send('toto')
 });
 
 router.get('/test-database', function (req, res) {
