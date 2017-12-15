@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm run build & concurrently --kill-others \"npm run serve-api\" \"npm run serve\"",
+    "start": "npm run build & concurrently --kill-others \"npm run serve-api\" \"npm run serve\" & nodemon ./server.js ",
     "serve": "ng serve --host 0.0.0.0 --proxy-config proxy.conf.json",
     "build": "ng build --output-path=public",
     "serve-api": "node server.js",
@@ -46,7 +46,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "nodemon": "^1.12.7",
+    "nodemon": "^1.13.0",
     "protractor": "~5.1.2",
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
