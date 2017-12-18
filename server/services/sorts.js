@@ -7,14 +7,14 @@ exports.mergingSort = function (data, attrToSort) {
   //data = tableau d'objet
   //attrToSort = le nom de l'attribut sur lequel il faut trier
 
-  var startTime = new Date().getTime();
+  var startTime = Date.now();
   var elapsedTime = 0;
 
   var sortedData = mergingSortPrivate(data, attrToSort);
 
-  elapsedTime = new Date().getTime() - startTime;
+  elapsedTime = Date.now() - startTime;
 
-  console.log(elapsedTime);
+  console.log('Tri Fusion executé en '+elapsedTime+ 'ms');
 
   return sortedData;
 
@@ -31,7 +31,8 @@ function mergingSortPrivate(data, attrToSort){
     var tab2 = mergingSortPrivate(data.slice(data.length/2,data.length), attrToSort);
 
     var smallest;
-    for(var i = 0; i < data.length; i++){
+    var length = data.length;
+    for(var i = 0; i < length; i++){
       smallest = tab1[0]===undefined ? tab2.splice(0,1) : tab2[0]===undefined? tab1.splice(0,1) : tab1[0][attrToSort]>tab2[0][attrToSort]? tab2.splice(0,1):tab1.splice(0,1) ;
       sortedData.push(smallest[0]);
     }
@@ -44,7 +45,42 @@ function mergingSortPrivate(data, attrToSort){
 exports.selectionSort = function (data, attrToSort) {
 
   //data = tableau d'objet
+  //attrToSort = le nom de l'attribut sur lequel il faut trier
 
+  var startTime = Date.now();
+  var elapsedTime = 0;
+
+  var sortedData = selectionSortPrivate(data, attrToSort);
+
+  elapsedTime = Date.now() - startTime;
+
+  console.log('Tri par sélection executé en '+elapsedTime+ 'ms');
+
+  return sortedData;
 
   return false;
 };
+
+function selectionSortPrivate(data, attrToSort){
+
+  var smallestIndex = 0;
+  console.log(data[0][attrToSort]);
+
+  var length = data.length;
+  var indexTri = 0;
+
+  while(indexTri !== length){
+    for(var i = indexTri; i < length; i++){
+      smallestIndex = data[smallestIndex][attrToSort]>data[i][attrToSort]? i:smallestIndex;
+
+    }
+    var b = data[indexTri];
+    data[indexTri] = data[smallestIndex];
+    data[smallestIndex] = b;
+
+    indexTri++;
+    smallestIndex = indexTri;
+  }
+  return data;
+
+}

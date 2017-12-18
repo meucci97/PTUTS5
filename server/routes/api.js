@@ -37,7 +37,7 @@ router.get('/accidents', function (req, res){
 router.get('/testSort', function(req, res){
   var acci = features.getData();
   var attrToSort = req.query.attrSort;
-  var sorted = (req.query.sort === 'A') ? sorts.mergingSort(acci, attrToSort) : sorts.selectionSort(acci);
+  var sorted = (req.query.sort === 'A') ? sorts.mergingSort(acci, attrToSort) : sorts.selectionSort(acci, attrToSort);
   //console.log(sorted);
   res.send(sorted);
 })
