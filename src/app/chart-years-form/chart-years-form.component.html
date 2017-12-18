@@ -1,0 +1,24 @@
+<form [formGroup]="chartYearsForm" (ngSubmit)="sendData(chartYearsForm.value)">
+
+  <div class="form-group">
+    <label for="periodeDebut">Période début</label>
+    <select name="periodeDebut" formControlName="periodeDebut" class="form-control">
+      <option *ngFor="let periode of periodes" [value]="periode.value" id="periodeDebut">{{periode.name}}</option>
+    </select>
+    <label for="periodeFin">Période fin</label>
+    <select name="periodeFin" formControlName="periodeFin" class="form-control">
+      <option *ngFor="let periode of periodes" [value]="periode.value" id="periodeFin">{{periode.name}}</option>
+    </select>
+  </div>
+
+
+  <div *ngFor="let annee of annees" class="form-check">
+    <input class="form-check-input" type="checkbox" [formControlName]='"date" + annee.value'> {{
+    annee.value }}
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Afficher les données</button>
+  </div>
+
+</form>
