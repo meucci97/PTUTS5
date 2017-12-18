@@ -64,7 +64,6 @@ exports.selectionSort = function (data, attrToSort) {
 function selectionSortPrivate(data, attrToSort){
 
   var smallestIndex = 0;
-  console.log(data[0][attrToSort]);
 
   var length = data.length;
   var indexTri = 0;
