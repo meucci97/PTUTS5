@@ -3,10 +3,15 @@ import { CommonModule } from '@angular/common';
 import { PostsComponent } from './posts/posts.component';
 import { Routes, RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import {ChartYearsComponent} from "./chart-years/chart-years.component";
 const routes: Routes = [
   {
     path: 'posts',
     component: PostsComponent
+  },
+  {
+    path: 'chart-years',
+    component: ChartYearsComponent
   }
 ];
 

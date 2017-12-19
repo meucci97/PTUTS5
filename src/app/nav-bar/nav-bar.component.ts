@@ -8,7 +8,8 @@ import {Component, OnInit} from '@angular/core';
 export class NavBarComponent implements OnInit {
 
   routes = [
-    {path: 'posts', name: 'Posts'}
+    {path: 'posts', name: 'Posts'},
+    {path: 'chart-years', name: 'Années'}
   ];
 
   constructor() {
