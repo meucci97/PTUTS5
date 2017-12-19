@@ -11,6 +11,35 @@ const api = require('./server/routes/api');
 
 const app = express();
 
+
+var oracledb = require('oracledb');
+
+
+oracledb.getConnection(
+  {
+    user          : "PTUTACC",
+    password      : "PTUTACC",
+    connectString : "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle710.univ-lyon1.fr)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SID=ORAPEDA1)))"
+
+  },
+  function(err, connection)
+  {
+    if (err) {
+      console.error(err.message);
+      return;
+    }
+    console.log('Connection was successful!');
+
+    connection.close(
+      function(err)
+      {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+      });
+  });
+
 // Parsers for POST data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
