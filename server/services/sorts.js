@@ -63,12 +63,12 @@ exports.selectionSort = function (data, attrToSort) {
 
 function selectionSortPrivate(data, attrToSort){
 
-  var smallestIndex = 0;
-
+  var smallestIndex;
   var length = data.length;
-  var indexTri = 0;
 
-  while(indexTri !== length){
+  for(var indexTri=0; indexTri < length; indexTri++){
+    smallestIndex = indexTri;
+
     for(var i = indexTri; i < length; i++){
       smallestIndex = data[smallestIndex][attrToSort]>data[i][attrToSort]? i:smallestIndex;
 
@@ -77,8 +77,6 @@ function selectionSortPrivate(data, attrToSort){
     data[indexTri] = data[smallestIndex];
     data[smallestIndex] = b;
 
-    indexTri++;
-    smallestIndex = indexTri;
   }
   return data;
 
