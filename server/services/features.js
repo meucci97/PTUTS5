@@ -1,6 +1,5 @@
 'use strict';
-// var Promise = require('bluebird');
-// var Rates = Promise.promisifyAll(require('../database/rates'));
+var features = require('../database/features');
 
 // Generate fake data for Stefano and Cyprien <3
 exports.getData = function() {
@@ -1053,51 +1052,13 @@ exports.getData = function() {
   ];
   return data;
 };
-exports.findOneByQuery = function(query) {
-  return Rates.findOneAsync(query);
-};
 
-exports.find = function(query) {
-  var data = [
-    {
-      "num_acc" : 1,
-      "mois" : 1,
-      "jour" : 1,
-      "hrmn" : 1,
-      "lum" : 1,
-      "isAgglo" : 1,
-      "inter" : 1,
-      "atm" : 1,
-      "col" : 1,
-      "com" : 1,
-      "dep" : 1
-    },
-    {
-      "num_acc" : 1,
-      "mois" : 1,
-      "jour" : 1,
-      "hrmn" : 1,
-      "lum" : 1,
-      "isAgglo" : 1,
-      "inter" : 1,
-      "atm" : 1,
-      "col" : 1,
-      "com" : 1,
-      "dep" : 1
-    },
-    {
-      "num_acc" : 1,
-      "mois" : 1,
-      "jour" : 1,
-      "hrmn" : 1,
-      "lum" : 1,
-      "isAgglo" : 1,
-      "inter" : 1,
-      "atm" : 1,
-      "col" : 1,
-      "com" : 1,
-      "dep" : 1
-    }
-  ];
-  return Rates.findAsync(query);
+exports.select = function(limit) {
+  return features.select(limit)
+    .then(function(result){
+      return result;
+    })
+    .catch(function(err){
+      return {};
+    });
 };

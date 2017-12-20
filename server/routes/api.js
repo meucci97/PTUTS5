@@ -14,20 +14,18 @@ router.get('/', function (req, res) {
   res.send('toto')
 });
 
-router.get('/test-database', function (req, res) {
-  console.log('features : ');
-  var toto = require('../database/features');
-  console.log('features : '+toto);
-  res.send(toto)
-});
-
 router.get('/accidents', function (req, res){
   // Check if the client asked for json
   if (req.accepts('application/json')) {
-    var acci = features.getData();
-    var attrToSort = req.query.attrSort;
-    var sorted = (req.query.sort === 'A') ? sorts.mergingSort(acci, attrToSort) : sorts.selectionSort(acci);
-    res.send(sorted);
+    features.select(100)
+      .then(function(accidents) {
+        var attrToSort = req.query.attrSort;
+        var sorted = (req.query.sort === 'A') ? sorts.mergingSort(accidents, attrToSort) : sorts.selectionSort(accidents);
+        res.send(sorted);
+      })
+      .catch(function (err) {
+        res.status(500).send({err: err});
+      });
   }
   else {
     res.status(406).send({err: 'Not valid type for asked resource'});
