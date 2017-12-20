@@ -1,16 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { PostsComponent } from './posts/posts.component';
-import { PostsService } from './posts/posts.service';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { D3GraphComponent } from './d3-graph/d3-graph.component';
-
+import {AppComponent} from './app.component';
+import {PostsComponent} from './posts/posts.component';
+import {PostsService} from './posts/posts.service';
+import {NavBarComponent} from './nav-bar/nav-bar.component';
+import {D3GraphComponent} from './d3-graph/d3-graph.component';
+import {ChartYearsComponent} from './chart-years/chart-years.component';
+import {ChartYearsFormComponent} from './chart-years-form/chart-years-form.component';
 
 
 @NgModule({
@@ -18,15 +19,20 @@ import { D3GraphComponent } from './d3-graph/d3-graph.component';
     AppComponent,
     PostsComponent,
     NavBarComponent,
-    D3GraphComponent 
+    D3GraphComponent,
+    ChartYearsComponent,
+    ChartYearsFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule ,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule // Add routes to the app
   ],
   providers: [PostsService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
