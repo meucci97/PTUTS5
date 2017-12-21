@@ -46,5 +46,5 @@ exports.selectionSort = function (data, attrToSort) {
   //data = tableau d'objet
 
 
-  return false;
+  return data;
 };
