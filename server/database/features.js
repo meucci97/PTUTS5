@@ -1,21 +1,21 @@
 var oracledb = require('oracledb');
 var dbConfig = require('./index.js');
 
-exports.select = function (limit = 10) {
+exports.select = function (query = {}, limit = 10) {
   if( limit == "ALL") {
     limit = 0;
   }
 
-  limit = parseInt(limit);
+  var queryStringAndValue = dbConfig.generateSQLCondition(query);
 
   return dbConfig.connect
     .then(function (conn) {
       return conn.execute(
         `SELECT *
-         FROM caracteristique`,
+         FROM caracteristique ` + queryStringAndValue.string,
         []  // bind value for :id
         , {
-          maxRows: limit
+          maxRows: parseInt(limit)
           , outFormat: oracledb.OBJECT  // query result format
           , extendedMetaData: false   // get extra metadata
           //, fetchArraySize: 100         // internal buffer allocation size for tuning

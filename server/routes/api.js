@@ -17,7 +17,12 @@ router.get('/', function (req, res) {
 router.get('/accidents', function (req, res){
   // Check if the client asked for json
   if (req.accepts('application/json')) {
-    features.select(req.query.limit)
+    /*
+    var query = {
+      "MOIS" : "1",
+      "DEPA" : {"toto":590,"tota":620}
+    };*/
+    features.select(req.query.query,req.query.limit)
       .then(function(results) {
         var accidents = results.rows;
         var attrToSort = req.query.attrSort;

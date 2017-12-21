@@ -1053,8 +1053,8 @@ exports.getData = function() {
   return data;
 };
 
-exports.select = function(limit) {
-  return features.select(limit)
+exports.select = function(query, limit) {
+  return features.select(query, limit)
     .then(function(result){
       return result;
     })
