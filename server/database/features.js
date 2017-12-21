@@ -2,6 +2,12 @@ var oracledb = require('oracledb');
 var dbConfig = require('./index.js');
 
 exports.select = function (limit = 10) {
+  if( limit == "ALL") {
+    limit = 0;
+  }
+
+  limit = parseInt(limit);
+
   return dbConfig.connect
     .then(function (conn) {
       return conn.execute(
@@ -17,6 +23,7 @@ exports.select = function (limit = 10) {
       ).then(function (result) {
         return result;
       }).catch(function(err){
+        console.log(err);
         return err;
       });
     })

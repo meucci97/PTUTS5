@@ -17,11 +17,10 @@ router.get('/', function (req, res) {
 router.get('/accidents', function (req, res){
   // Check if the client asked for json
   if (req.accepts('application/json')) {
-    features.select(100)
+    features.select(req.query.limit)
       .then(function(results) {
         var accidents = results.rows;
         var attrToSort = req.query.attrSort;
-        console.log(req.query.sort === 'A');
         var sorted = (req.query.sort === 'A') ? sorts.mergingSort(accidents, attrToSort) : sorts.selectionSort(accidents, attrToSort);
         res.send(sorted);
       })
