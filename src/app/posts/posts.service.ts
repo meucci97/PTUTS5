@@ -16,6 +16,10 @@ export class PostsService {
       return this.http.get("/api/posts");
     }
 
+    getAcc(){
+      return this.http.get("/api/accidents");
+    }
+
     sendParam(){
       return this.http.get("/api/toto", { params: new HttpParams().set('id','3')})
     }

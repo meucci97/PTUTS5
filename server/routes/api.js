@@ -22,7 +22,8 @@ router.get('/accidents', function (req, res){
         var accidents = results.rows;
         var attrToSort = req.query.attrSort;
         var sorted = (req.query.sort === 'A') ? sorts.mergingSort(accidents, attrToSort) : sorts.selectionSort(accidents, attrToSort);
-        res.send(sorted);
+        response.data=sorted;
+        res.json(response);
       })
       .catch(function (err) {
         res.status(500).send({err: err});
