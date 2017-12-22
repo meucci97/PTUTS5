@@ -134,4 +134,32 @@ router.get('/toto', (req, res) => {
 
 });
 
+router.get('/getDate', (req, res) => {
+  var numAcc = req.query.numAcc;
+
+  features.getDate(numAcc)
+    .then(function(response){
+      res.send(response);
+      console.log("accidentDate "+response);
+    })
+    .catch(function (err) {
+      res.status(500).send({err: err});
+    });
+
+
+});
+
+router.get('/moulinetteDate', (req, res) => {
+
+  features.moulinetteDate()
+    .then(function(response){
+      res.send(response);
+    })
+    .catch(function (err) {
+      res.status(500).send({err: err});
+    });
+
+
+});
+
 module.exports = router;

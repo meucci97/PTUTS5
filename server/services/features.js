@@ -1062,3 +1062,34 @@ exports.select = function(query, limit) {
       return {};
     });
 };
+
+exports.getDate = function(numAcc) {
+  return features.getDate(numAcc)
+    .then(function(result){
+      var infosDate = result.rows[0];
+
+      var accidentDate = new Date();
+      accidentDate.setFullYear(infosDate["NUM_ACC"].slice(0,4));
+      accidentDate.setMonth(infosDate["MOIS"] - 1); //les objets date commencent les mois  a janvier = 0
+      accidentDate.setDate(infosDate["JOUR"]);
+      accidentDate.setUTCHours(infosDate["HRMM"].slice(0,2));
+      accidentDate.setUTCMinutes(infosDate["HRMM"].slice(2,4));
+
+      return accidentDate;
+    })
+    .catch(function(err){
+      console.log(err);
+      return {};
+    });
+};
+
+exports.moulinetteDate = function(){
+  return features.moulinetteDate()
+    .then(function(result){
+      return result.rows;
+    })
+    .catch(function(err){
+      console.log(err);
+      return {}
+    })
+};
