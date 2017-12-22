@@ -12,7 +12,7 @@ exports.select = function (query = {}, limit = 10) {
     .then(function (conn) {
       return conn.execute(
         `SELECT *
-         FROM usagers ` + queryStringAndValue.string,
+         FROM usager ` + queryStringAndValue.string,
         []  // bind value for :id
         , {
           maxRows: parseInt(limit)
