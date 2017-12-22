@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 var features = require('../services/features');
 var vehicles = require('../services/vehicles');
+var users = require('../services/users');
+var places = require('../services/places');
 var sorts = require('../services/sorts');
 
 let response = {
@@ -51,6 +53,46 @@ router.get('/vehicules', function (req, res){
   // Check if the client asked for json
   if (req.accepts('application/json')) {
     vehicles.select(req.query.query,req.query.limit)
+      .then(function(results) {
+        var vehicles = results.rows;
+        // TODO put this in a function
+        var attrToSort = req.query.attrSort;
+        var sorted = (req.query.sort === 'A') ? sorts.mergingSort(vehicles, attrToSort) : sorts.selectionSort(vehicles, attrToSort);
+        res.send(sorted);
+      })
+      .catch(function (err) {
+        res.status(500).send({err: err});
+      });
+  }
+  else {
+    res.status(406).send({err: 'Not valid type for asked resource'});
+  }
+});
+
+router.get('/usagers', function (req, res){
+  // Check if the client asked for json
+  if (req.accepts('application/json')) {
+    users.select(req.query.query,req.query.limit)
+      .then(function(results) {
+        var vehicles = results.rows;
+        // TODO put this in a function
+        var attrToSort = req.query.attrSort;
+        var sorted = (req.query.sort === 'A') ? sorts.mergingSort(vehicles, attrToSort) : sorts.selectionSort(vehicles, attrToSort);
+        res.send(sorted);
+      })
+      .catch(function (err) {
+        res.status(500).send({err: err});
+      });
+  }
+  else {
+    res.status(406).send({err: 'Not valid type for asked resource'});
+  }
+});
+
+router.get('/lieux', function (req, res){
+  // Check if the client asked for json
+  if (req.accepts('application/json')) {
+    places.select(req.query.query,req.query.limit)
       .then(function(results) {
         var vehicles = results.rows;
         // TODO put this in a function
