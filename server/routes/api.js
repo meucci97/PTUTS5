@@ -5,6 +5,7 @@ let vehicles = require('../services/vehicles');
 let users = require('../services/users');
 let places = require('../services/places');
 let sorts = require('../services/sorts');
+let testDB = require('../services/testDB');
 
 let response = {
   status: 200,
