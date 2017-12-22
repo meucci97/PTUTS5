@@ -58,7 +58,7 @@ exports.selectionSort = function (data, attrToSort) {
 
   return sortedData;
 
-  return false;
+  return data;
 };
 
 function selectionSortPrivate(data, attrToSort){

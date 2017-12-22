@@ -12,8 +12,8 @@ exports.select = function (query = {}, limit = 10) {
     .then(function (conn) {
       return conn.execute(
         `SELECT *
-         FROM caracteristique ` + queryStringAndValue.string,
-        []  // bind value for :id
+         FROM vehicule ` + queryStringAndValue.string
+        , []  // bind value for :id
         , {
           maxRows: parseInt(limit)
           , outFormat: oracledb.OBJECT  // query result format
