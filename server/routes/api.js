@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-var features = require('../services/features');
-var vehicles = require('../services/vehicles');
-var users = require('../services/users');
-var places = require('../services/places');
-var sorts = require('../services/sorts');
+let features = require('../services/features');
+let vehicles = require('../services/vehicles');
+let users = require('../services/users');
+let places = require('../services/places');
+let sorts = require('../services/sorts');
 
 let response = {
   status: 200,
@@ -17,13 +17,6 @@ router.get('/', function (req, res) {
   res.send('toto')
 });
 
-router.get('/test-database', function (req, res) {
-  console.log('features : ');
-  var toto = require('../database/features');
-  console.log('features : '+toto);
-  res.send(toto)
-});
-
 router.get('/accidents', function (req, res){
   // Check if the client asked for json
   if (req.accepts('application/json')) {
@@ -34,10 +27,9 @@ router.get('/accidents', function (req, res){
     };*/
     features.select(req.query.query,req.query.limit)
       .then(function(results) {
-        var accidents = results.rows;
-        // TODO put this in a function
-        var attrToSort = req.query.attrSort;
-        var sorted = (req.query.sort === 'A') ? sorts.mergingSort(accidents, attrToSort) : sorts.selectionSort(accidents, attrToSort);
+        let accidents = results.rows;
+        let attrToSort = req.query.attrSort;
+        let sorted = (req.query.sort === 'A') ? sorts.mergingSort(accidents, attrToSort) : sorts.selectionSort(accidents, attrToSort);
         res.send(sorted);
       })
       .catch(function (err) {
@@ -54,10 +46,9 @@ router.get('/vehicules', function (req, res){
   if (req.accepts('application/json')) {
     vehicles.select(req.query.query,req.query.limit)
       .then(function(results) {
-        var vehicles = results.rows;
-        // TODO put this in a function
-        var attrToSort = req.query.attrSort;
-        var sorted = (req.query.sort === 'A') ? sorts.mergingSort(vehicles, attrToSort) : sorts.selectionSort(vehicles, attrToSort);
+        let vehicles = results.rows;
+        let attrToSort = req.query.attrSort;
+        let sorted = (req.query.sort === 'A') ? sorts.mergingSort(vehicles, attrToSort) : sorts.selectionSort(vehicles, attrToSort);
         res.send(sorted);
       })
       .catch(function (err) {
@@ -74,10 +65,9 @@ router.get('/usagers', function (req, res){
   if (req.accepts('application/json')) {
     users.select(req.query.query,req.query.limit)
       .then(function(results) {
-        var vehicles = results.rows;
-        // TODO put this in a function
-        var attrToSort = req.query.attrSort;
-        var sorted = (req.query.sort === 'A') ? sorts.mergingSort(vehicles, attrToSort) : sorts.selectionSort(vehicles, attrToSort);
+        let vehicles = results.rows;
+        let attrToSort = req.query.attrSort;
+        let sorted = (req.query.sort === 'A') ? sorts.mergingSort(vehicles, attrToSort) : sorts.selectionSort(vehicles, attrToSort);
         res.send(sorted);
       })
       .catch(function (err) {
@@ -94,10 +84,9 @@ router.get('/lieux', function (req, res){
   if (req.accepts('application/json')) {
     places.select(req.query.query,req.query.limit)
       .then(function(results) {
-        var vehicles = results.rows;
-        // TODO put this in a function
-        var attrToSort = req.query.attrSort;
-        var sorted = (req.query.sort === 'A') ? sorts.mergingSort(vehicles, attrToSort) : sorts.selectionSort(vehicles, attrToSort);
+        let vehicles = results.rows;
+        let attrToSort = req.query.attrSort;
+        let sorted = (req.query.sort === 'A') ? sorts.mergingSort(vehicles, attrToSort) : sorts.selectionSort(vehicles, attrToSort);
         res.send(sorted);
       })
       .catch(function (err) {
