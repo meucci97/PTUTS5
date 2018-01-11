@@ -1,0 +1,17 @@
+
+#statNetPosFlowbased, #tabFlowbased{
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid grey
+  }
+  
+  #statNetPosFlowbased p{
+    font: 20px "Arial Black", sans-serif;
+    color: white;
+    text-align: center;
+  }
+  
+  .chartStackedNegative{
+    width: 120%;
+    height: 500px;
+  }

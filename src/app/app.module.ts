@@ -12,6 +12,7 @@ import {NavBarComponent} from './nav-bar/nav-bar.component';
 import {D3GraphComponent} from './d3-graph/d3-graph.component';
 import {ChartYearsComponent} from './chart-years/chart-years.component';
 import {ChartYearsFormComponent} from './chart-years-form/chart-years-form.component';
+import { BarchartComponent } from './barchart/barchart.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {ChartYearsFormComponent} from './chart-years-form/chart-years-form.compo
     NavBarComponent,
     D3GraphComponent,
     ChartYearsComponent,
-    ChartYearsFormComponent
+    ChartYearsFormComponent,
+    BarchartComponent
   ],
   imports: [
     BrowserModule,

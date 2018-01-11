@@ -9,7 +9,8 @@ export class NavBarComponent implements OnInit {
 
   routes = [
     {path: 'posts', name: 'Posts'},
-    {path: 'chart-years', name: 'Années'}
+    {path: 'chart-years', name: 'Années'},
+    {path: 'chart-bar', name: 'Bar Chart'}
   ];
 
   constructor() {
