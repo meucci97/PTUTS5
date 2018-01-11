@@ -1,6 +1,6 @@
-var oracledb = require('oracledb');
+let oracledb = require('oracledb');
 
-var dbConfig = {
+let dbConfig = {
   user: "PTUTACC",
   password: "PTUTACC",
   connectString:"(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle710.univ-lyon1.fr)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SID=ORAPEDA1)))"
@@ -24,14 +24,14 @@ exports.connect = oracledb.getConnection(
   }
  */
 exports.generateSQLCondition = function (query = {}) {
-  var string = "";
+  let string = "";
 
   // Check if there is query conditions
-  if (query.length !== 0) {
+  if (Object.keys(query).length !== 0) {
     // trick to always put " AND " at the beginning of the string
     string += " WHERE 1=1";
-    for( var key in query) {
-      var queryValue = query[key];
+    for(let key in query) {
+      let queryValue = query[key];
 
       // Check which kind of value it is and add it to the SQL string
       if(Array.isArray(queryValue)) {
@@ -45,4 +45,4 @@ exports.generateSQLCondition = function (query = {}) {
   }
 
   return string;
-}
+};
