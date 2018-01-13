@@ -1062,3 +1062,13 @@ exports.select = function(query, limit) {
       return {};
     });
 };
+
+exports.graph1 = function(dateStart, dateEnd) {
+  return features.graph1(dateStart, dateEnd)
+    .then(function(result){
+      return result;
+    })
+    .catch(function(err){
+      return {"err": err};
+    });
+};
