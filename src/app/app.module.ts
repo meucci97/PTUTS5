@@ -13,6 +13,7 @@ import {D3GraphComponent} from './d3-graph/d3-graph.component';
 import {ChartYearsComponent} from './chart-years/chart-years.component';
 import {ChartYearsFormComponent} from './chart-years-form/chart-years-form.component';
 import { PiechartComponent } from './piechart/piechart.component';
+import { PeriodeformComponent } from './periodeform/periodeform.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { PiechartComponent } from './piechart/piechart.component';
     D3GraphComponent,
     ChartYearsComponent,
     ChartYearsFormComponent,
-    PiechartComponent
+    PiechartComponent,
+    PeriodeformComponent
   ],
   imports: [
     BrowserModule,
