@@ -36,11 +36,12 @@ exports.select = function (query = {}, limit = 10) {
 
 exports.graph1 = function (dateStart, dateEnd) {
 let query =
-  "SELECT *       " +
-  "FROM caracteristique " +
+  "SELECT USAGER.NUM_ACC, HRMM, LISTAGG(USAGER.GRAV, ',') WITHIN GROUP (ORDER BY USAGER.GRAV) AS GRAV " +
+  "FROM caracteristique JOIN USAGER ON CARACTERISTIQUE.NUM_ACC = USAGER.NUM_ACC " +
   "WHERE  ( ( jour >= " + dateStart[0] + " AND MOIS <= " + dateStart[1] + " ) " +
   "OR ( jour <= " + dateEnd[0] + " AND MOIS >= " + dateEnd[1] + " ) ) " +
-  "AND ( num_acc LIKE '" + dateStart[2] + "%' OR num_acc LIKE '" + dateEnd[2] + "%' ) ";
+  "AND ( caracteristique.num_acc LIKE '" + dateStart[2] + "%' OR caracteristique.num_acc LIKE '" + dateEnd[2] + "%' ) " +
+  "GROUP BY USAGER.NUM_ACC,HRMM";
 
 
   return dbConfig.connect

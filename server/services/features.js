@@ -1,5 +1,12 @@
 'use strict';
 var features = require('../database/features');
+let types = {
+  1:"Sans Gravite",
+  2:"Mortel",
+  3:"Grave",
+  4:"Leger"
+};
+
 
 // Generate fake data for Stefano and Cyprien <3
 exports.getData = function() {
@@ -1094,16 +1101,58 @@ function filterHours(hour) {
   return filter;
 }
 
-let countByHours = function (data) {
-  let filtered = [];
+function countByHours (data) {
+  let result = [], filteredByHour = [];
   let hour, i;
 
   for (i = 0; i < 24; i++) {
     hour = i.toString();
+    filteredByHour = data.filter(filterHours(hour));
+    result[i] = {
+      "hour": i,
+      "nb" : filteredByHour.length,
+      "types" : countByType(filteredByHour)
+    };
+  }
 
-    filtered[i] = { "hour": i, "nb" : data.filter(filterHours(hour)).length};
+  return result;
+}
+
+function countByType(data) {
+  let i, filtered = [];
+  for(i = 0; i < 4; i++) {
+    if(i === 0) {
+      filtered.push(
+        {
+          "type": "Sans Gravité",
+          "nb": data.filter(function(item){return item['GRAV'].indexOf("4") === -1 && item['GRAV'].indexOf("3") === -1 && item['GRAV'].indexOf("2") === -1}).length
+        }
+      );
+    } else if (i === 1) {
+      filtered.push(
+        {
+          "type": "Leger",
+          "nb": data.filter(function(item){return item['GRAV'].indexOf("4") === -1 && item['GRAV'].indexOf("3") === -1 && item['GRAV'].indexOf("2") !== -1}).length
+        }
+      );
+    } else if (i === 2) {
+      filtered.push(
+        {
+          "type": "Grave",
+          "nb": data.filter(function(item){return item['GRAV'].indexOf("4") === -1 && item['GRAV'].indexOf("3") !== -1}).length
+        }
+      );
+    } else if (i === 3) {
+      filtered.push(
+        {
+          "type": "mortel",
+          "nb": data.filter(function(item){return item['GRAV'].indexOf("4") !== -1}).length
+        }
+      );
+    }
+
   }
 
   return filtered;
-};
+}
 
