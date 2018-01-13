@@ -21,17 +21,25 @@ router.get('/', function (req, res) {
 router.get('/graph1', function (req, res){
   let dateEnd = req.query.dateEnd.split("-");
   let dateStart = req.query.dateStart.split("-");
-
-
- features.graph1(dateStart,dateEnd)
+  features.graph1(dateStart,dateEnd)
     .then(function(results) {
       res.send(results);
     })
     .catch(function (err) {
       res.status(500).send({err: err});
     });
+});
 
-
+router.get('/graph5', function (req, res){
+  let dateEnd = req.query.dateEnd.split("-");
+  let dateStart = req.query.dateStart.split("-");
+  features.graph5(dateStart,dateEnd)
+    .then(function(results) {
+      res.send(results);
+    })
+    .catch(function (err) {
+      res.status(500).send({err: err});
+    });
 });
 
 router.get('/accidents', function (req, res){

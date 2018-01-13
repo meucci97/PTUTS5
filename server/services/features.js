@@ -1,10 +1,13 @@
 'use strict';
-var features = require('../database/features');
-let types = {
-  1:"Sans Gravite",
-  2:"Mortel",
-  3:"Grave",
-  4:"Leger"
+let features = require('../database/features');
+let collisions = {
+  1:"Deux véhicules - frontale",
+  2:"Deux véhicules – par l’arrière ",
+  3:"Deux véhicules – par le coté",
+  4:"Trois véhicules et plus – en chaîne",
+  5:"Trois véhicules et plus - collisions multiples",
+  6:"Autre collision ",
+  7:"Sans collision"
 };
 
 
@@ -1080,6 +1083,17 @@ exports.graph1 = function(dateStart, dateEnd) {
     });
 };
 
+exports.graph5 = function(dateStart, dateEnd) {
+  return features.graph5(dateStart, dateEnd)
+    .then(function(result){
+      console.log(result);
+      return countByCollision(result.rows);
+    })
+    .catch(function(err){
+      return {"err": err};
+    });
+};
+
 /* Return the right filter for hour */
 function filterHours(hour) {
   let filter;
@@ -1112,6 +1126,29 @@ function countByHours (data) {
       "hour": i,
       "nb" : filteredByHour.length,
       "types" : countByType(filteredByHour)
+    };
+  }
+
+  return result;
+}
+
+function filterCollisions(collision) {
+  return function(item) {
+    return item["COL"] === collision;
+  };
+}
+
+function countByCollision (data) {
+  let result = [], filteredByCollision = [];
+  let collision, i;
+
+  for (i = 0; i < 7; i++) {
+    collision = i + 1;
+    filteredByCollision= data.filter(filterCollisions(collision));
+    result[i] = {
+      "collision": collisions[collision],
+      "nb" : filteredByCollision.length,
+      "types" : countByType(filteredByCollision)
     };
   }
 
