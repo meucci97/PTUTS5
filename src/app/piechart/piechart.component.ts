@@ -57,13 +57,13 @@ export class PiechartComponent implements OnInit {
 
     arcs.append("path")
       .attr("fill", function (d, i) {
-        return color(String(i);
+        return color(String(i));
       })
-      .attr("d", arc);
+      .attr("d", <any>arc);
 
     arcs.append("text")
       .attr("transform", function (d) {
-        return "translate(" + arc.centroid(d) + ")";
+        return "translate(" + arc.centroid(<any>d) + ")";
       })
       .attr("text-anchor", "middle")
       .attr("fill", "white")
@@ -72,11 +72,11 @@ export class PiechartComponent implements OnInit {
       });
 
     var legende = svg.selectAll(".legend")
-      .data(pie(this.regions))
+      .data(pie(<any>this.regions))
       .enter()
       .append("g")
       .attr("transform", function (d, i) {
-        return "translate(" + (this.width - 400) + "," + (i * 15 + 20) + ")";
+        return "translate(" + (this.width) + "," + (i * 15 + 20) + ")";
       })
       .attr("class", "legend");
 
@@ -84,7 +84,7 @@ export class PiechartComponent implements OnInit {
       .attr("width", 10)
       .attr("height", 10)
       .attr("fill", function (d, i) {
-        return color(String(i);
+        return color(String(i));
       });
 
     legende.append("text")
@@ -92,7 +92,7 @@ export class PiechartComponent implements OnInit {
       .attr("y", 10)
       .attr("x", 11)
       .text(function (d) {
-        return d.data;
+        return <any>d.data;
       });
   }
 
