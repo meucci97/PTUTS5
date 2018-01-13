@@ -1066,9 +1066,44 @@ exports.select = function(query, limit) {
 exports.graph1 = function(dateStart, dateEnd) {
   return features.graph1(dateStart, dateEnd)
     .then(function(result){
-      return result;
+      return countByHours(result.rows);
     })
     .catch(function(err){
       return {"err": err};
     });
 };
+
+/* Return the right filter for hour */
+function filterHours(hour) {
+  let filter;
+
+  if(hour.length === 2){
+    filter = function(item) {
+      return item["HRMM"].length === 4 && item["HRMM"].startsWith(hour);
+    };
+  } else if(hour !== "0") {
+    filter = function(item) {
+      return item["HRMM"].length === 3 && item["HRMM"].startsWith(hour);
+    };
+  } else {
+    filter = function(item) {
+      return item["HRMM"].length === 2 || item["HRMM"].length === 1;
+    };
+  }
+
+  return filter;
+}
+
+let countByHours = function (data) {
+  let filtered = [];
+  let hour, i;
+
+  for (i = 0; i < 24; i++) {
+    hour = i.toString();
+
+    filtered[i] = { "hour": i, "nb" : data.filter(filterHours(hour)).length};
+  }
+
+  return filtered;
+};
+
