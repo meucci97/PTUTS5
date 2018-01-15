@@ -8,8 +8,11 @@ import * as d3 from "d3";
 })
 export class PiechartComponent implements OnInit {
 
-  width = 300;
-  height = 300;
+  width = 1000;
+  height = 1000;
+
+  widthPieChart = 300;
+  heightPieChart = 300;
 
   dataset = [5, 10, 20, 45, 6, 25, 3, 90, 44, 33, 7, 12, 27];
 
@@ -39,7 +42,7 @@ export class PiechartComponent implements OnInit {
       .attr("width", this.width)
       .attr("height", this.height);
 
-    var outerRadius = this.width / 2;
+    var outerRadius = this.heightPieChart / 2;
     var innerRadius = 0;
     var arc = d3.arc()
       .innerRadius(innerRadius)
@@ -72,12 +75,12 @@ export class PiechartComponent implements OnInit {
         return d.value;
       });
 
-    /*var legende = svg.selectAll(".legend")
+    var legende = svg.selectAll(".legend")
       .data(pie(<any>this.regions))
       .enter()
       .append("g")
       .attr("transform", function (d, i) {
-        return "translate(" + (this.width) + "," + (i * 15 + 20) + ")";
+        return "translate(" + (400) + "," + (i * 15 + 20) + ")";
       })
       .attr("class", "legend");
 
@@ -94,7 +97,7 @@ export class PiechartComponent implements OnInit {
       .attr("x", 11)
       .text(function (d) {
         return <any>d.data;
-      });*/
+      });
   }
 
 }
