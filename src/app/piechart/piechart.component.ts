@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PostsService} from '../posts/posts.service';
 import * as d3 from "d3";
 
 @Component({
@@ -8,11 +9,15 @@ import * as d3 from "d3";
 })
 export class PiechartComponent implements OnInit {
 
+  titre = "Pie Chart";
+  
   width = 1000;
-  height = 1000;
+  height = 350;
 
   widthPieChart = 300;
   heightPieChart = 300;
+
+  accidents: Array<any>;
 
   dataset = [5, 10, 20, 45, 6, 25, 3, 90, 44, 33, 7, 12, 27];
 
@@ -30,9 +35,15 @@ export class PiechartComponent implements OnInit {
     "Pays de la Loire",
     "Provence-Alpes-Côte d'Azur"];
 
-  constructor() { }
+  constructor(private _postService: PostsService) { }
 
   ngOnInit() {
+    this._postService.getAccPieChart().subscribe((data : any[])=> {
+      //this.accidents = data['data'];
+      //console.log(this.accidents);
+      //this.afficherPieChart();
+    });
+
     this.afficherPieChart();
   }
 
@@ -80,7 +91,7 @@ export class PiechartComponent implements OnInit {
       .enter()
       .append("g")
       .attr("transform", function (d, i) {
-        return "translate(" + (400) + "," + (i * 15 + 20) + ")";
+        return "translate(" + (350) + "," + (i * 15 + 40) + ")";
       })
       .attr("class", "legend");
 

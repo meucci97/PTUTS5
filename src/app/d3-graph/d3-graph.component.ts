@@ -11,6 +11,8 @@ import * as d3scale from "d3-scale";
 })
 export class D3GraphComponent implements OnInit {
 
+  titre = "D3 Graph";
+  
   constructor(private _postService: PostsService) { }
   value: Array<any>;
   myArray : Array<any>;

@@ -14,8 +14,8 @@ export class PeriodeformComponent implements OnInit {
 
   ngOnInit() {
     this.PeriodeForm = this.formBuilder.group({
-      periodeDebut: '',
-      periodeFin: '',
+      periodeDebut: '2012-01-01',
+      periodeFin: '2017-01-01',
     });
   }
 
