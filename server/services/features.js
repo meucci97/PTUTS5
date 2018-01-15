@@ -1086,7 +1086,6 @@ exports.graph1 = function(dateStart, dateEnd) {
 exports.graph5 = function(dateStart, dateEnd) {
   return features.graph5(dateStart, dateEnd)
     .then(function(result){
-      console.log(result);
       return countByCollision(result.rows);
     })
     .catch(function(err){

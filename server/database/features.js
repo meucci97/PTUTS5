@@ -51,7 +51,7 @@ exports.graph1 = function (dateStart, dateEnd) {
         ,
         []  // bind value for :id
         , {
-          maxRows: parseInt(1000000)
+          maxRows: parseInt(0)
           , outFormat: oracledb.OBJECT  // query result format
           , extendedMetaData: false   // get extra metadata
           //, fetchArraySize: 100         // internal buffer allocation size for tuning
@@ -87,7 +87,7 @@ exports.graph5 = function (dateStart, dateEnd) {
         ,
         []  // bind value for :id
         , {
-          maxRows: parseInt(10)
+          maxRows: parseInt(0)
           , outFormat: oracledb.OBJECT  // query result format
           , extendedMetaData: false   // get extra metadata
           //, fetchArraySize: 100         // internal buffer allocation size for tuning
