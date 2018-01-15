@@ -30,6 +30,7 @@ export class PiechartComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.afficherPieChart();
   }
 
   afficherPieChart() {
@@ -71,7 +72,7 @@ export class PiechartComponent implements OnInit {
         return d.value;
       });
 
-    var legende = svg.selectAll(".legend")
+    /*var legende = svg.selectAll(".legend")
       .data(pie(<any>this.regions))
       .enter()
       .append("g")
@@ -93,7 +94,7 @@ export class PiechartComponent implements OnInit {
       .attr("x", 11)
       .text(function (d) {
         return <any>d.data;
-      });
+      });*/
   }
 
 }
