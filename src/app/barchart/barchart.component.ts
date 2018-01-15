@@ -92,22 +92,22 @@ export class BarchartComponent implements OnInit {
       var legend = svgSN.selectAll('.legend')
         .data(series)
         .enter().append('g')
+        .attr("transform", function(d, i) { return "translate("+(350)+"," +( i * 20) + ")"; })
         .attr('class', 'legend');
-        // .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
 
       legend.append('rect')
-        .attr('x', 1740)
+        .attr('x', 700)
         .attr('y', function(d, i) { return i * 25 + 30 })
         .attr('width', 18)
         .attr('height', 18)
         .style('fill', function(d) { return zSN(d.key); });
 
       legend.append('text')
-        .attr('x', 1765)
+        .attr('x', 720)
         .attr('y', function(d, i) { return i * 25 +39; })
         .attr('dy', '.35em')
         .style('text-anchor', 'start')
-        .style('fill', '#FFF')
+        .style('fill', function(d) { return zSN(d.key); })
         .text(function(d, i) { return categories[i]; });
 
       function stackMin(serie) {
