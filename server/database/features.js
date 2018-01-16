@@ -1,12 +1,61 @@
 var oracledb = require('oracledb');
 var dbConfig = require('./index.js');
 
-function periodeCondition(dateStart, dateEnd){
-  let monthStart = Number(dateStart.getMonth())+1;
-  let monthEnd = Number(dateEnd.getMonth())+1;
-  return "( ( jour >= " + dateStart.getDate() + " AND MOIS >= " + monthStart + " ) " +
-    "AND ( jour <= " + dateEnd.getDate() + " AND MOIS <= " + monthEnd + " ) ) " +
-    "AND ( caracteristique.num_acc LIKE '" + dateStart.getFullYear() + "%' OR caracteristique.num_acc LIKE '" + dateEnd.getFullYear() + "%' ) ";
+function durationCondition(dateStart, dateEnd){
+  let monthStart = dateStart.getMonth()+1;
+  let monthEnd = dateEnd.getMonth()+1;
+  let condition = "";
+
+  // year condition
+  if(dateStart.getFullYear() === dateEnd.getFullYear()) {
+    condition = " caracteristique.num_acc LIKE '" + dateStart.getFullYear() + "%' ";
+
+    if(dateStart.getMonth() === dateEnd.getMonth()) {
+      condition += " AND mois = " + monthStart;
+
+      if(dateStart.getDate() === dateEnd.getDate()) {
+        condition += " AND jour = " + dateStart.getDate();
+      } else {
+        condition += " AND jour >= " + dateStart.getDate() + " AND jour <= " + dateEnd.getDate()
+      }
+
+    } else {
+      condition += " AND ( ";
+      condition += " ( mois = " + monthStart + " AND jour >= " + dateStart.getDate() + " ) ";
+      condition += " OR ( mois > " + monthStart + " AND mois < " + monthEnd + " ) ";
+      condition += " OR ( mois = " + monthStart + " AND jour <= " + dateEnd.getDate() + " ) ";
+      condition += " ) ";
+    }
+
+  } else {
+    // create condition for first year
+    condition += " ( " +
+      " caracteristique.num_acc LIKE '" + dateStart.getFullYear() + "%' " +
+      " AND ( " +
+      " ( mois = " + monthStart + " AND jour >= " + dateStart.getDate() + " ) " +
+      " OR ( mois > " + monthStart + " )" +
+      " ) " +
+      " ) ";
+
+    // condition for the last year
+    condition += " OR ( " +
+      " caracteristique.num_acc LIKE '" + dateEnd.getFullYear() + "%' " +
+      " AND ( " +
+      " ( mois = " + monthEnd + " AND jour <= " + dateEnd.getDate() + " ) " +
+      " OR ( mois < " + monthEnd + " ) " +
+      " ) " +
+      " ) ";
+
+    // check if we have at least 1 year between start year and end year
+    if(dateEnd.getFullYear() !== dateStart.getFullYear()+1){
+      let i;
+      for(i = dateStart.getFullYear()+1; i < dateEnd.getFullYear(); i++) {
+        condition += " OR caracteristique.num_acc LIKE '" + i + "%' "
+      }
+    }
+  }
+
+  return condition;
 }
 
 exports.select = function (query = {}, limit = 10) {
@@ -46,7 +95,7 @@ exports.graph1 = function (dateStart, dateEnd) {
   let query =
     "SELECT USAGER.NUM_ACC, HRMM, LISTAGG(USAGER.GRAV, ',') WITHIN GROUP (ORDER BY USAGER.GRAV) AS GRAV " +
     "FROM caracteristique JOIN USAGER ON CARACTERISTIQUE.NUM_ACC = USAGER.NUM_ACC " +
-    "WHERE " + periodeCondition(dateStart, dateEnd) +
+    "WHERE " + durationCondition(dateStart, dateEnd) +
     "GROUP BY USAGER.NUM_ACC,HRMM";
 
 console.log(query);
@@ -80,7 +129,7 @@ exports.graph4 = function (dateStart, dateEnd) {
   let query =
     "SELECT NUM_ACC, DEPA " +
     "FROM caracteristique " +
-    "WHERE " + periodeCondition(dateStart, dateEnd);
+    "WHERE " + durationCondition(dateStart, dateEnd);
 
   return dbConfig.connect
     .then(function (conn) {
@@ -112,7 +161,7 @@ exports.graph5 = function (dateStart, dateEnd) {
   let query =
     "SELECT USAGER.NUM_ACC, COL, LISTAGG(USAGER.GRAV, ',') WITHIN GROUP (ORDER BY USAGER.GRAV) AS GRAV " +
     "FROM caracteristique JOIN USAGER ON CARACTERISTIQUE.NUM_ACC = USAGER.NUM_ACC " +
-    "WHERE " + periodeCondition(dateStart, dateEnd) +
+    "WHERE " + durationCondition(dateStart, dateEnd) +
     "GROUP BY USAGER.NUM_ACC, COL";
 
 
