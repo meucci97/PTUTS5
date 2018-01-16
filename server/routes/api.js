@@ -13,14 +13,25 @@ let response = {
   message: null
 };
 
+function checkDate(date) {
+  let temp = date.split('-');
+  return temp[0].length === 4 && temp[1].length === 2  && temp[2].length === 2;
+}
+
 /* GET api listing. */
 router.get('/', function (req, res) {
   res.send('toto')
 });
 
 router.get('/graph1', function (req, res){
-  let dateEnd = req.query.dateEnd.split("-");
-  let dateStart = req.query.dateStart.split("-");
+  let dateEnd = req.query.dateEnd;
+  let dateStart = req.query.dateStart;
+  if(checkDate(dateEnd) && checkDate(dateStart)){
+    dateEnd = new Date(dateEnd);
+    dateStart = new Date(dateStart);
+  } else {
+    res.status(400).send({"error": "Date invalid"});
+  }
   features.graph1(dateStart,dateEnd)
     .then(function(results) {
       res.send(results);
@@ -31,8 +42,14 @@ router.get('/graph1', function (req, res){
 });
 
 router.get('/graph5', function (req, res){
-  let dateEnd = req.query.dateEnd.split("-");
-  let dateStart = req.query.dateStart.split("-");
+  let dateEnd = req.query.dateEnd;
+  let dateStart = req.query.dateStart;
+  if(checkDate(dateEnd) && checkDate(dateStart)){
+    dateEnd = new Date(dateEnd);
+    dateStart = new Date(dateStart);
+  } else {
+    res.status(400).send({"error": "Date invalid"});
+  }
   features.graph5(dateStart,dateEnd)
     .then(function(results) {
       res.send(results);
@@ -43,8 +60,14 @@ router.get('/graph5', function (req, res){
 });
 
 router.get('/graph4', function (req, res){
-  let dateEnd = req.query.dateEnd.split("-");
-  let dateStart = req.query.dateStart.split("-");
+  let dateEnd = req.query.dateEnd;
+  let dateStart = req.query.dateStart;
+  if(checkDate(dateEnd) && checkDate(dateStart)){
+    dateEnd = new Date(dateEnd);
+    dateStart = new Date(dateStart);
+  } else {
+    res.status(400).send({"error": "Date invalid"});
+  }
   features.graph4(dateStart,dateEnd)
     .then(function(results) {
       res.send(results);
