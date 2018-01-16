@@ -1198,7 +1198,6 @@ function countByRegion (data) {
   let result = [], filteredByRegion= [];
 
   regions.forEach(function(region) {
-    console.log(region.departments);
     filteredByRegion = data.filter(filterDepartments(region.departments));
     result.push({
       "region": region.label,

@@ -47,7 +47,6 @@ router.get('/graph4', function (req, res){
   let dateStart = req.query.dateStart.split("-");
   features.graph4(dateStart,dateEnd)
     .then(function(results) {
-      console.log('here');
       res.send(results);
     })
     .catch(function (err) {
