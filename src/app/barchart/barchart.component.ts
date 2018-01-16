@@ -38,10 +38,13 @@ export class BarchartComponent implements OnInit {
   countries = ["France", "Germany", "Austria", "Belgium", "Netherlands", 'Spain', 'Portugal', 'Italy', 'UK', 'Switzerland'];
 
   onDataload(myData: Array<any>) {
-    this._postService.getBarChart().subscribe((data: any[]) => {
+    console.log(myData['durationDebut']);
+    console.log(myData['durationFin']);
+    this._postService.getBarChart(myData['durationDebut'], myData['durationFin']).subscribe((data: any[]) => {
       // Read the result field from the JSON response.
+      console.log("yes");
       console.log(data);
-      this.chartStackNegativeCreate('chartStackedNegative', this.dataSN, this.countries);
+      this.chartStackNegativeCreate('chartStackedNegative', data, this.countries);
     });
     console.log('MyGraph');
     console.log(myData);
@@ -50,24 +53,41 @@ export class BarchartComponent implements OnInit {
   constructor(private _postService: PostsService) { }
  
   ngOnInit() {
-    this.chartStackNegativeCreate('chartStackedNegative', this.dataSN, this.countries);
+    //this.chartStackNegativeCreate('chartStackedNegative', this.dataSN, this.countries);
   }
 
-  chartStackNegativeCreate(chartStackNegative, dataSN, categories){
-    
+  chartStackNegativeCreate(chartStackNegative, dataSN, countries){
+      var categories=[];
+      var myData=[];
+      var tmp=new Array();
+      for( var i = 0 ; i < dataSN.length; i++) {
+        if(i==0){
+          for(var j=0; j<dataSN[i]['data'].length;j++){
+          categories.push(dataSN[i]['data'][j]['label']);
+          }
+        }
+        tmp=new Array();
+        tmp['label']=dataSN[i]['label'];
+        for(var j=0; j<dataSN[i]['data'].length;j++){ 
+          tmp[categories[j]]= dataSN[i]['data'][j]['count'];
+          console.log(tmp);
+        }
+      myData.push(tmp);
+      }
+      d3.selectAll("svg > *").remove();
       var series = d3.stack()
           .keys(categories)
           .offset(d3.stackOffsetDiverging)
-          (dataSN);
+          (myData);
     
-    
+      
       var svgSN = d3.select('svg.'+chartStackNegative),
           marginSN = {top: 20, right: 30, bottom: 30, left: 60},
           widthSN = +1000,
           heightSN = +500;
     
       var xSN = d3.scaleBand()
-          .domain(dataSN.map(function(d) { return d.hour; }))
+          .domain(myData.map(function(d) { return d.label; }))
           .rangeRound([marginSN.left, widthSN - marginSN.right])
           .padding(0.1);
     
@@ -86,8 +106,8 @@ export class BarchartComponent implements OnInit {
         .data(function(d) { return d; })
         .enter().append('rect')
           .attr('width', xSN.bandwidth)
-          .attr('x', function(d) {console.log(d['data']['hour']); return xSN(String(d['data']['hour'])) ; })
-          .attr('y', function(d,i) { return ySN(d[1]); })
+          .attr('x', function(d) { return xSN(String(d['data']['label'])) ; })
+          .attr('y', function(d,i) { console.log(d[1]+" "+ySN(d[1])); return ySN(d[1]); })
           .attr('height', function(d) { return Math.abs(ySN(d[0]) - ySN(d[1])); })
     
       svgSN.append('g')

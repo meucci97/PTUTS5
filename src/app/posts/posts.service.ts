@@ -23,8 +23,11 @@ export class PostsService {
     getAccPieChart() {
       return this.http.get("api/graph4");
     }
-    getBarChart() {
-      return this.http.get("api/graph1?dateEnd=02-01-2016&dateStart=01-01-2016");
+    getBarChart(dateStart, dateEnd) {
+      console.log(dateStart);
+      console.log(dateEnd);
+      console.log("api/graph1?dateEnd="+dateEnd+"&dateStart="+dateStart);
+      return this.http.get("api/graph1?dateEnd="+dateEnd+"&dateStart="+dateStart);
     }
 
     sendParam(){
