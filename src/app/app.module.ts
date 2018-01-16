@@ -15,6 +15,7 @@ import {ChartYearsFormComponent} from './chart-years-form/chart-years-form.compo
 import { BarchartComponent } from './barchart/barchart.component';
 import { PiechartComponent } from './piechart/piechart.component';
 import { DurationformComponent } from './durationform/durationform.component';
+import { Graph1BarChartComponent } from './graph1-bar-chart/graph1-bar-chart.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { DurationformComponent } from './durationform/durationform.component';
     ChartYearsFormComponent,
     BarchartComponent,
     PiechartComponent,
-    DurationformComponent
+    DurationformComponent,
+    Graph1BarChartComponent
   ],
   imports: [
     BrowserModule,

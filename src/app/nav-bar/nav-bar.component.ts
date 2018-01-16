@@ -11,7 +11,8 @@ export class NavBarComponent implements OnInit {
     {path: 'posts', name: 'Posts'},
     {path: 'd3-graph', name: 'Années'},
     {path: 'chart-bar', name: 'Bar Chart'},
-    {path: 'pie-chart', name: 'Pie Chart'}
+    {path: 'pie-chart', name: 'Pie Chart'},
+    {path: 'nbAccidentHeure', name:"Nombre d'accidents par heure"}
   ];
 
   constructor() {
