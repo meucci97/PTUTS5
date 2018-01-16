@@ -2,9 +2,11 @@ var oracledb = require('oracledb');
 var dbConfig = require('./index.js');
 
 function periodeCondition(dateStart, dateEnd){
- return "( ( jour >= " + dateStart.getDate() + " AND MOIS <= " + dateStart.getMonth()+1 + " ) " +
-  "AND ( jour <= " + dateEnd.getDate() + " AND MOIS >= " + dateEnd.getMonth()+1 + " ) ) " +
-  "AND ( caracteristique.num_acc LIKE '" + dateStart.getFullYear() + "%' OR caracteristique.num_acc LIKE '" + dateEnd.getFullYear() + "%' ) ";
+  let monthStart = dateStart.getMonth()+1;
+  let monthEnd = dateEnd.getMonth()+1;
+  return "( ( jour >= " + dateStart.getDate() + " AND MOIS <= " + monthStart + " ) " +
+    "AND ( jour <= " + dateEnd.getDate() + " AND MOIS >= " + monthEnd + " ) ) " +
+    "AND ( caracteristique.num_acc LIKE '" + dateStart.getFullYear() + "%' OR caracteristique.num_acc LIKE '" + dateEnd.getFullYear() + "%' ) ";
 }
 
 exports.select = function (query = {}, limit = 10) {
@@ -47,7 +49,7 @@ exports.graph1 = function (dateStart, dateEnd) {
     "WHERE " + periodeCondition(dateStart, dateEnd) +
     "GROUP BY USAGER.NUM_ACC,HRMM";
 
-
+console.log(query);
   return dbConfig.connect
     .then(function (conn) {
       return conn.execute(
