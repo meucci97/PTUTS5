@@ -10,6 +10,97 @@ let collisions = {
   7:"Sans collision"
 };
 
+let regions = [
+  {
+    "label": "Alsace",
+    "departments": [670,680]
+  },
+  {
+    "label": "Aquitaine",
+    "departments": [240,330,400,470,640]
+  },
+  {
+    "label": "Auvergne",
+    "departments": [30,150,420,630]
+  },
+  {
+    "label": "Basse-Normandie",
+    "departments": [140,500,610]
+  },
+  {
+    "label": "Bourgogne",
+    "departments": [210,580,710,890]
+  },
+  {
+    "label": "Bretagne",
+    "departments": [220,290,350,560]
+  },
+  {
+    "label": "Centre",
+    "departments": [180,280,360,370,410,450]
+  },
+  {
+    "label": "Champagne-Ardenne",
+    "departments": [80,100,510,520]
+  },
+  {
+    "label": "Corse",
+    "departments": [201,202]
+  },
+  {
+    "label": "Franche-Comté",
+    "departments": [250,390,700,900]
+  },
+  {
+    "label": "Haute-Normandie",
+    "departments": [270,760]
+  },
+  {
+    "label": "Île-de-France",
+    "departments": [750,770,780,910,920,930,940,950]
+  },
+  {
+    "label": "Languedoc-Roussillon",
+    "departments": [110,300,340,480,660]
+  },
+  {
+    "label": "Limousin",
+    "departments": [190,230,870]
+  },
+  {
+    "label": "Lorraine",
+    "departments": [540,550,570,880]
+  },
+  {
+    "label": "Midi-Pyrénées",
+    "departments": [90,120,310,320,460,650,810,820]
+  },
+  {
+    "label": "Nord-Pas-de-Calais",
+    "departments": [590,620]
+  },
+  {
+    "label": "Pays de la Loire",
+    "departments": [440,490,530,720,850]
+  },
+  {
+    "label": "Picardie",
+    "departments": [20,600,800]
+  },
+  {
+    "label": "Poitou-Charentes",
+    "departments": [160,170,790,860]
+  },
+  {
+    "label": "Provence-Alpes-Côte-d'Azur",
+    "departments": [40,50,60,130,830,840]
+  },
+  {
+    "label": "Rhône-Alpes",
+    "departments": [10,70,260,380,420,690,730,640]
+  }
+];
+
 
 // Generate fake data for Stefano and Cyprien <3
 exports.getData = function() {
@@ -1092,6 +1183,37 @@ exports.graph5 = function(dateStart, dateEnd) {
       return {"err": err};
     });
 };
+
+exports.graph4 = function(dateStart, dateEnd) {
+  return features.graph4(dateStart, dateEnd)
+    .then(function(result){
+      return countByRegion(result.rows);
+    })
+    .catch(function(err){
+      return {"err": err};
+    });
+};
+
+function countByRegion (data) {
+  let result = [], filteredByRegion= [];
+
+  regions.forEach(function(region) {
+    console.log(region.departments);
+    filteredByRegion = data.filter(filterDepartments(region.departments));
+    result.push({
+      "region": region.label,
+      "nb" : filteredByRegion.length
+    });
+  });
+
+  return result;
+}
+
+function filterDepartments(departments) {
+  return function(item) {
+    return departments.indexOf(item["DEPA"]) !== -1;
+  };
+}
 
 /* Return the right filter for hour */
 function filterHours(hour) {
