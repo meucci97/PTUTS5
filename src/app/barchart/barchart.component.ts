@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import * as d3scale from 'd3-scale';
-
+import { PostsService } from '../posts/posts.service';
 @Component({
   selector: 'app-barchart',
   templateUrl: './barchart.component.html',
@@ -37,7 +37,17 @@ export class BarchartComponent implements OnInit {
 
   countries = ["France", "Germany", "Austria", "Belgium", "Netherlands", 'Spain', 'Portugal', 'Italy', 'UK', 'Switzerland'];
 
-  constructor() { }
+  onDataload(myData: Array<any>) {
+    this._postService.getBarChart().subscribe((data: any[]) => {
+      // Read the result field from the JSON response.
+      console.log(data);
+      this.chartStackNegativeCreate('chartStackedNegative', this.dataSN, this.countries);
+    });
+    console.log('MyGraph');
+    console.log(myData);
+  }
+
+  constructor(private _postService: PostsService) { }
  
   ngOnInit() {
     this.chartStackNegativeCreate('chartStackedNegative', this.dataSN, this.countries);
