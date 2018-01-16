@@ -21,7 +21,7 @@ export class PostsService {
     }
 
     getAccPieChart() {
-      return this.http.get("api/piechart");
+      return this.http.get("api/graph4");
     }
 
     sendParam(){

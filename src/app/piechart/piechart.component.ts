@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PostsService} from '../posts/posts.service';
+import { PostsService } from '../posts/posts.service';
 import * as d3 from "d3";
 
 @Component({
@@ -10,7 +10,7 @@ import * as d3 from "d3";
 export class PiechartComponent implements OnInit {
 
   titre = "Pie Chart";
-  
+
   width = 1000;
   height = 350;
 
@@ -19,26 +19,26 @@ export class PiechartComponent implements OnInit {
 
   accidents: Array<any>;
 
-  dataset = [5, 10, 20, 45, 6, 25, 3, 90, 44, 33, 7, 12, 27];
-
-  regions = ["Auvergne-Rhône-Alpes",
-    "Bourgogne-Franche-Comté",
-    "Bretagne",
-    "Centre-Val de Loire",
-    "Corse",
-    "Grand Est",
-    "Hauts-de-France",
-    "Île-de-France",
-    "Normandie",
-    "Nouvelle-Aquitaine",
-    "Occitanie",
-    "Pays de la Loire",
-    "Provence-Alpes-Côte d'Azur"];
+  dataset = [
+    { "nb": 5, "region": "Auvergne-Rhône-Alpes" },
+    { "nb": 10, "region": "Bourgogne-Franche-Comté" },
+    { "nb": 14, "region": "Bretagne" },
+    { "nb": 45, "region": "Centre-Val de Loire" },
+    { "nb": 6, "region": "Corse" },
+    { "nb": 25, "region": "Grand Est" },
+    { "nb": 3, "region": "Hauts-de-France" },
+    { "nb": 90, "region": "Île-de-France" },
+    { "nb": 44, "region": "Normandie" },
+    { "nb": 33, "region": "Nouvelle-Aquitaine" },
+    { "nb": 7, "region": "Pays de la Loire" },
+    { "nb": 12, "region": "Provence-Alpes-Côte d'Azur" },
+    { "nb": 27, "region": "Occitanie" }
+];
 
   constructor(private _postService: PostsService) { }
 
   ngOnInit() {
-    this._postService.getAccPieChart().subscribe((data : any[])=> {
+    this._postService.getAccPieChart().subscribe((data: any[]) => {
       //this.accidents = data['data'];
       //console.log(this.accidents);
       //this.afficherPieChart();
@@ -59,7 +59,10 @@ export class PiechartComponent implements OnInit {
       .innerRadius(innerRadius)
       .outerRadius(outerRadius);
 
-    var pie = d3.pie();
+    var pie = d3.pie()
+      .value(function (d) { 
+        return d.nb; 
+    });
 
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -87,11 +90,11 @@ export class PiechartComponent implements OnInit {
       });
 
     var legende = svg.selectAll(".legend")
-      .data(pie(<any>this.regions))
+      .data(pie(<any>this.dataset))
       .enter()
       .append("g")
       .attr("transform", function (d, i) {
-        return "translate(" + (350) + "," + (i * 15 + 40) + ")";
+        return "translate(" + (350) + "," + (i * 20 + 20) + ")";
       })
       .attr("class", "legend");
 
@@ -105,9 +108,9 @@ export class PiechartComponent implements OnInit {
     legende.append("text")
       .style("font-size", 15)
       .attr("y", 10)
-      .attr("x", 11)
+      .attr("x", 15)
       .text(function (d) {
-        return <any>d.data;
+        return <any>d.data.region;
       });
   }
 
