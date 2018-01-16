@@ -423,14 +423,14 @@ export class D3GraphComponent implements OnInit {
     for(var i = 0; i<myData.length; i++){
   
       legend.append("rect")
-        .attr("x", widthA+100)
+        .attr("x", widthA+125)
         .attr("y", i * 25 + 30)
         .attr("width", 18)
         .attr("height", 18)
         .style("fill", colorFill(String(i)));
   
       legend.append("text")
-        .attr("x", widthA+125)
+        .attr("x", widthA+150)
         .attr("y", i * 25 + 39)
         .attr("dy", ".35em")
         .style("text-anchor", "start")
