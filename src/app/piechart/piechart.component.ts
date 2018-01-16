@@ -20,19 +20,19 @@ export class PiechartComponent implements OnInit {
   accidents: Array<any>;
 
   dataset = [
-    { "nb": 5, "region": "Auvergne-Rhône-Alpes" },
-    { "nb": 10, "region": "Bourgogne-Franche-Comté" },
-    { "nb": 14, "region": "Bretagne" },
-    { "nb": 45, "region": "Centre-Val de Loire" },
-    { "nb": 6, "region": "Corse" },
-    { "nb": 25, "region": "Grand Est" },
-    { "nb": 3, "region": "Hauts-de-France" },
-    { "nb": 20, "region": "Île-de-France" },
-    { "nb": 44, "region": "Normandie" },
-    { "nb": 33, "region": "Nouvelle-Aquitaine" },
-    { "nb": 7, "region": "Pays de la Loire" },
-    { "nb": 12, "region": "Provence-Alpes-Côte d'Azur" },
-    { "nb": 27, "region": "Occitanie" }
+    { nb: 5, region: "Auvergne-Rhône-Alpes" },
+    { nb: 10, region: "Bourgogne-Franche-Comté" },
+    { nb: 14, region: "Bretagne" },
+    { nb: 45, region: "Centre-Val de Loire" },
+    { nb: 6, region: "Corse" },
+    { nb: 25, region: "Grand Est" },
+    { nb: 3, region: "Hauts-de-France" },
+    { nb: 20, region: "Île-de-France" },
+    { nb: 44, region: "Normandie" },
+    { nb: 33, region: "Nouvelle-Aquitaine" },
+    { nb: 7, region: "Pays de la Loire" },
+    { nb: 12, region: "Provence-Alpes-Côte d'Azur" },
+    { nb: 27, region: "Occitanie" }
 ];
 
   constructor(private _postService: PostsService) { }
@@ -48,6 +48,12 @@ export class PiechartComponent implements OnInit {
   }
 
   afficherPieChart() {
+    var myValues=[];
+    var myRegion=[];
+    for(var i=0;i<this.dataset.length;i++){
+      myValues.push(this.dataset[i]['nb']);
+      myRegion.push(this.dataset[i]['region'])
+    }
 
     var svg = d3.select("svg")
       .attr("width", this.width)
@@ -59,21 +65,19 @@ export class PiechartComponent implements OnInit {
       .innerRadius(innerRadius)
       .outerRadius(outerRadius);
 
-    var pie = d3.pie()
-      .value(function (d) { 
-        return Number(d); 
-    });
+    var pie = d3.pie();
+   
 
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
     var arcs = svg.selectAll("g.arc")
-      .data(pie(this.dataset['nb']))
+      .data(pie(myValues))
       .enter()
       .append("g")
       .attr("class", "arc")
       .attr("transform", "translate(" + outerRadius + ", " + outerRadius + ")");
-
-    arcs.append("path")
+    
+      arcs.append("path")
       .attr("fill", function (d, i) {
         return color(String(i));
       })
@@ -86,11 +90,11 @@ export class PiechartComponent implements OnInit {
       .attr("text-anchor", "middle")
       .attr("fill", "white")
       .text(function (d) {
-        return <any>d.value;
+        return <any>d.data;
       });
 
     var legende = svg.selectAll(".legend")
-      .data(pie(<any>this.dataset))
+      .data(pie(myRegion))
       .enter()
       .append("g")
       .attr("transform", function (d, i) {
@@ -110,7 +114,7 @@ export class PiechartComponent implements OnInit {
       .attr("y", 10)
       .attr("x", 15)
       .text(function (d) {
-        return <any>d['region'];
+        return <any>d.data;
       });
   }
 
