@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PeriodeformComponent } from './periodeform.component';
+import { PeriodeformComponent } from './durationform.component';
 
 describe('PeriodeformComponent', () => {
   let component: PeriodeformComponent;

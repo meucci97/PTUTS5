@@ -3,17 +3,17 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-periodeform',
-  templateUrl: './periodeform.component.html',
-  styleUrls: ['./periodeform.component.css']
+  templateUrl: './durationform.component.html',
+  styleUrls: ['./durationform.component.css']
 })
-export class PeriodeformComponent implements OnInit {
+export class DurationformComponent implements OnInit {
 
-  PeriodeForm: FormGroup;
-  
+  DurationForm: FormGroup;
+
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.PeriodeForm = this.formBuilder.group({
+    this.DurationForm = this.formBuilder.group({
       periodeDebut: '2012-01-01',
       periodeFin: '2017-01-01',
     });
