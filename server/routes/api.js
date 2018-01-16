@@ -54,6 +54,19 @@ router.get('/graph4', function (req, res){
     });
 });
 
+router.get('/graph2', function (req, res){
+  let monthEnd = req.query.monthEnd;
+  let monthStart = req.query.monthStart;
+  let years = req.query.years;
+  features.graph2(monthStart,monthEnd, years)
+    .then(function(results) {
+      res.send(results);
+    })
+    .catch(function (err) {
+      res.status(500).send({err: err});
+    });
+});
+
 router.get('/accidents', function (req, res){
   // Check if the client asked for json
   if (req.accepts('application/json')) {

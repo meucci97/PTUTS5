@@ -1194,6 +1194,47 @@ exports.graph4 = function(dateStart, dateEnd) {
     });
 };
 
+exports.graph2 = function(monthStart, monthEnd, years) {
+  return features.graph2(monthStart, monthEnd, years)
+    .then(function(result){
+      let date, yearData, filteredByYear, filteredByDate, returnData = [];
+
+      years.forEach(function(year){
+        date = new Date(year+"-"+monthStart+"-01");
+        filteredByYear = result.rows.filter(filterYear(year));
+
+        yearData = {
+          "year" : year,
+          "nb" : filteredByYear.length,
+          "dates" : []
+        };
+
+        do{
+          filteredByDate = filteredByYear.filter(filterDate(date));
+
+          yearData.dates.push({
+            "day": date.toISOString().substring(0, 10),
+            "nb" : filteredByDate.length
+          });
+
+          date.setDate(date.getDate() + 1);
+        } while (date.getMonth()+1 <= monthEnd);
+        returnData.push(yearData);
+      });
+
+      return returnData;
+    })
+    .catch(function(err){
+      return {"err": err};
+    });
+};
+
+function filterDate(date) {
+  return function(item){
+    return item["NUM_ACC"].startsWith(date.getFullYear()) && item["MOIS"] === date.getMonth()+1 && item["JOUR"] === date.getDate();
+  }
+}
+
 function countByRegion (data) {
   let result = [], filteredByRegion= [];
 
@@ -1211,6 +1252,12 @@ function countByRegion (data) {
 function filterDepartments(departments) {
   return function(item) {
     return departments.indexOf(item["DEPA"]) !== -1;
+  };
+}
+
+function filterYear(year) {
+  return function(item) {
+    return item["NUM_ACC"].startsWith(year);
   };
 }
 

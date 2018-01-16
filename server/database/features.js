@@ -139,3 +139,41 @@ exports.graph5 = function (dateStart, dateEnd) {
     })
 
 };
+
+exports.graph2 = function (monthStart, monthEnd, years) {
+  let query =
+    "SELECT NUM_ACC, MOIS, JOUR " +
+    "FROM caracteristique " +
+    "WHERE mois >= " + monthStart + " AND mois <= " + monthEnd;
+
+  query += " AND ( 1=0 ";
+  years.forEach(function (year) {
+    query += " OR num_acc LIKE '" + year + "%'";
+  });
+  query += " ) ";
+
+  return dbConfig.connect
+    .then(function (conn) {
+      return conn.execute(
+        query
+        ,
+        []  // bind value for :id
+        , {
+          maxRows: parseInt(0)
+          , outFormat: oracledb.OBJECT  // query result format
+          , extendedMetaData: false   // get extra metadata
+          //, fetchArraySize: 100         // internal buffer allocation size for tuning
+        }
+      ).then(function (result) {
+        return result;
+      }).catch(function(err){
+        console.log(err);
+        return err;
+      });
+    })
+    .catch(function (err) {
+      console.error(err);
+      return {};
+    })
+
+};
