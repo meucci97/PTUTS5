@@ -2,10 +2,10 @@ var oracledb = require('oracledb');
 var dbConfig = require('./index.js');
 
 function periodeCondition(dateStart, dateEnd){
-  let monthStart = dateStart.getMonth()+1;
-  let monthEnd = dateEnd.getMonth()+1;
-  return "( ( jour >= " + dateStart.getDate() + " AND MOIS <= " + monthStart + " ) " +
-    "AND ( jour <= " + dateEnd.getDate() + " AND MOIS >= " + monthEnd + " ) ) " +
+  let monthStart = Number(dateStart.getMonth())+1;
+  let monthEnd = Number(dateEnd.getMonth())+1;
+  return "( ( jour >= " + dateStart.getDate() + " AND MOIS >= " + monthStart + " ) " +
+    "AND ( jour <= " + dateEnd.getDate() + " AND MOIS <= " + monthEnd + " ) ) " +
     "AND ( caracteristique.num_acc LIKE '" + dateStart.getFullYear() + "%' OR caracteristique.num_acc LIKE '" + dateEnd.getFullYear() + "%' ) ";
 }
 
