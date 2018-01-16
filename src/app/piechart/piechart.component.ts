@@ -61,13 +61,13 @@ export class PiechartComponent implements OnInit {
 
     var pie = d3.pie()
       .value(function (d) { 
-        return d.nb; 
+        return Number(d); 
     });
 
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
     var arcs = svg.selectAll("g.arc")
-      .data(pie(this.dataset))
+      .data(pie(this.dataset['nb']))
       .enter()
       .append("g")
       .attr("class", "arc")
@@ -86,7 +86,7 @@ export class PiechartComponent implements OnInit {
       .attr("text-anchor", "middle")
       .attr("fill", "white")
       .text(function (d) {
-        return d.value;
+        return <any>d.value;
       });
 
     var legende = svg.selectAll(".legend")
@@ -110,7 +110,7 @@ export class PiechartComponent implements OnInit {
       .attr("y", 10)
       .attr("x", 15)
       .text(function (d) {
-        return <any>d.data.region;
+        return <any>d['region'];
       });
   }
 
