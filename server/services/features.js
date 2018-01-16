@@ -1204,17 +1204,17 @@ exports.graph2 = function(monthStart, monthEnd, years) {
         filteredByYear = result.rows.filter(filterYear(year));
 
         yearData = {
-          "year" : year,
-          "nb" : filteredByYear.length,
-          "dates" : []
+          "label" : year,
+          "count" : filteredByYear.length,
+          "data" : []
         };
 
         do{
           filteredByDate = filteredByYear.filter(filterDate(date));
 
-          yearData.dates.push({
-            "day": date.toISOString().substring(0, 10),
-            "nb" : filteredByDate.length
+          yearData.data.push({
+            "label": date.toISOString().substring(0, 10),
+            "count" : filteredByDate.length
           });
 
           date.setDate(date.getDate() + 1);
@@ -1241,8 +1241,8 @@ function countByRegion (data) {
   regions.forEach(function(region) {
     filteredByRegion = data.filter(filterDepartments(region.departments));
     result.push({
-      "region": region.label,
-      "nb" : filteredByRegion.length
+      "label": region.label,
+      "count" : filteredByRegion.length
     });
   });
 
@@ -1290,9 +1290,9 @@ function countByHours (data) {
     hour = i.toString();
     filteredByHour = data.filter(filterHours(hour));
     result[i] = {
-      "hour": i,
-      "nb" : filteredByHour.length,
-      "types" : countByType(filteredByHour)
+      "label": i,
+      "count" : filteredByHour.length,
+      "data" : countByType(filteredByHour)
     };
   }
 
@@ -1313,9 +1313,9 @@ function countByCollision (data) {
     collision = i + 1;
     filteredByCollision= data.filter(filterCollisions(collision));
     result[i] = {
-      "collision": collisions[collision],
-      "nb" : filteredByCollision.length,
-      "types" : countByType(filteredByCollision)
+      "label": collisions[collision],
+      "count" : filteredByCollision.length,
+      "data" : countByType(filteredByCollision)
     };
   }
 
@@ -1328,29 +1328,29 @@ function countByType(data) {
     if(i === 0) {
       filtered.push(
         {
-          "type": "Sans Gravité",
-          "nb": data.filter(function(item){return item['GRAV'].indexOf("4") === -1 && item['GRAV'].indexOf("3") === -1 && item['GRAV'].indexOf("2") === -1}).length
+          "label": "Sans Gravité",
+          "count": data.filter(function(item){return item['GRAV'].indexOf("4") === -1 && item['GRAV'].indexOf("3") === -1 && item['GRAV'].indexOf("2") === -1}).length
         }
       );
     } else if (i === 1) {
       filtered.push(
         {
-          "type": "Leger",
-          "nb": data.filter(function(item){return item['GRAV'].indexOf("4") === -1 && item['GRAV'].indexOf("3") === -1 && item['GRAV'].indexOf("2") !== -1}).length
+          "label": "Leger",
+          "count": data.filter(function(item){return item['GRAV'].indexOf("4") === -1 && item['GRAV'].indexOf("3") === -1 && item['GRAV'].indexOf("2") !== -1}).length
         }
       );
     } else if (i === 2) {
       filtered.push(
         {
-          "type": "Grave",
-          "nb": data.filter(function(item){return item['GRAV'].indexOf("4") === -1 && item['GRAV'].indexOf("3") !== -1}).length
+          "label": "Grave",
+          "count": data.filter(function(item){return item['GRAV'].indexOf("4") === -1 && item['GRAV'].indexOf("3") !== -1}).length
         }
       );
     } else if (i === 3) {
       filtered.push(
         {
-          "type": "mortel",
-          "nb": data.filter(function(item){return item['GRAV'].indexOf("4") !== -1}).length
+          "label": "mortel",
+          "count": data.filter(function(item){return item['GRAV'].indexOf("4") !== -1}).length
         }
       );
     }
