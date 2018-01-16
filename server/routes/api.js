@@ -18,6 +18,42 @@ router.get('/', function (req, res) {
   res.send('toto')
 });
 
+router.get('/graph1', function (req, res){
+  let dateEnd = req.query.dateEnd.split("-");
+  let dateStart = req.query.dateStart.split("-");
+  features.graph1(dateStart,dateEnd)
+    .then(function(results) {
+      res.send(results);
+    })
+    .catch(function (err) {
+      res.status(500).send({err: err});
+    });
+});
+
+router.get('/graph5', function (req, res){
+  let dateEnd = req.query.dateEnd.split("-");
+  let dateStart = req.query.dateStart.split("-");
+  features.graph5(dateStart,dateEnd)
+    .then(function(results) {
+      res.send(results);
+    })
+    .catch(function (err) {
+      res.status(500).send({err: err});
+    });
+});
+
+router.get('/graph4', function (req, res){
+  let dateEnd = req.query.dateEnd.split("-");
+  let dateStart = req.query.dateStart.split("-");
+  features.graph4(dateStart,dateEnd)
+    .then(function(results) {
+      res.send(results);
+    })
+    .catch(function (err) {
+      res.status(500).send({err: err});
+    });
+});
+
 router.get('/accidents', function (req, res){
   // Check if the client asked for json
   if (req.accepts('application/json')) {
