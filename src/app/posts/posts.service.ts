@@ -20,6 +20,13 @@ export class PostsService {
       return this.http.get("/api/accidents");
     }
 
+    getAccPieChart() {
+      return this.http.get("api/graph4");
+    }
+    getBarChart() {
+      return this.http.get("api/graph1?dateEnd=02-01-2016&dateStart=01-01-2016");
+    }
+
     sendParam(){
       return this.http.get("/api/toto", { params: new HttpParams().set('id','3')})
     }

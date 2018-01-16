@@ -15,18 +15,18 @@ export class ChartYearsFormComponent implements OnInit {
   }
 
   periodes = [
-    {id: 1, name: 'Janvier', value: 'janvier'},
-    {id: 2, name: 'Février', value: 'fevrier'},
-    {id: 3, name: 'Mars', value: 'mars'},
-    {id: 4, name: 'Avril', value: 'avril'},
-    {id: 5, name: 'Mai', value: 'mai'},
-    {id: 6, name: 'Juin', value: 'juin'},
-    {id: 7, name: 'Juillet', value: 'juillet'},
-    {id: 8, name: 'Août', value: 'aout'},
-    {id: 9, name: 'Septembre', value: 'septembre'},
-    {id: 10, name: 'Octobre', value: 'octobre'},
-    {id: 11, name: 'Novembre', value: 'novembre'},
-    {id: 12, name: 'Décembre', value: 'decembre'},
+    {id: 1, name: 'Janvier', value: '1'},
+    {id: 2, name: 'Février', value: '2'},
+    {id: 3, name: 'Mars', value: '3'},
+    {id: 4, name: 'Avril', value: '4'},
+    {id: 5, name: 'Mai', value: '5'},
+    {id: 6, name: 'Juin', value: '6'},
+    {id: 7, name: 'Juillet', value: '7'},
+    {id: 8, name: 'Août', value: '8'},
+    {id: 9, name: 'Septembre', value: '9'},
+    {id: 10, name: 'Octobre', value: '10'},
+    {id: 11, name: 'Novembre', value: '11'},
+    {id: 12, name: 'Décembre', value: '12'},
   ];
 
   annees = [
@@ -39,8 +39,8 @@ export class ChartYearsFormComponent implements OnInit {
 
   ngOnInit() {
     this.chartYearsForm = this.formBuilder.group({
-      periodeDebut: 'janvier',
-      periodeFin: 'janvier',
+      periodeDebut: '1',
+      periodeFin: '2',
       date2012: false,
       date2013: false,
       date2014: false,
