@@ -3,10 +3,10 @@
   <div class="form-group">
 
     <label for="durationDebut">Période de début</label>
-    <input type="date" name="durationDebut" [value]="DurationForm.durationDebut.value" class="form-control" formControlName="durationDebut">
+    <input type="date" min="2012-01-01" max="2016-12-31" name="durationDebut" [value]="DurationForm.durationDebut.value" class="form-control" formControlName="durationDebut">
     
     <label for="durationFin">Période de fin</label>
-    <input type="date" name="periodeFin" class="form-control" [value]="DurationForm.durationFin.value" formControlName="durationFin">
+    <input type="date" min="2012-01-01" max="2016-12-31" name="durationFin" class="form-control" [value]="DurationForm.durationFin.value" formControlName="durationFin">
 
   </div>
 

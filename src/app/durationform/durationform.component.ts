@@ -16,8 +16,8 @@ export class DurationformComponent implements OnInit {
 
   ngOnInit() {
     this.DurationForm = this.formBuilder.group({
-      durationDebut: '2012-01-01',
-      durationFin: '2017-01-01',
+      durationDebut: '2016-01-01',
+      durationFin: '2016-12-31',
     });
   }
 
