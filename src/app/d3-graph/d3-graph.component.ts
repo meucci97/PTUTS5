@@ -24,7 +24,7 @@ export class D3GraphComponent implements OnInit {
       // Read the result field from the JSON response.
       this.value = data['data'];
       console.log(this.value);
-      console.log(new Date(2018,1,29));
+      console.log(new Date(2018, 1, 29));
       console.log('test');
       console.log(this.tableTest2);
       //this.toto();
@@ -43,7 +43,7 @@ export class D3GraphComponent implements OnInit {
       this.myArray.push({ 'date': new Date(2018, 0, (i + 1)), 'nbacc': i });
       this.scaleDate.push(new Date(2018, 0, (i + 1)));
     }
-    
+
     console.log(this.myArray);
     var margin = { top: 40, right: 50, bottom: 50, left: 50 },
       width = +((document.getElementById('graph').offsetWidth) - margin.left - margin.right),
@@ -169,7 +169,7 @@ export class D3GraphComponent implements OnInit {
     }
     ]
   }, {
-    annee: '2015', donnees: [{
+    annee: '2016', donnees: [{
       jour: (new Date(2018, 0, (1))),
       nb: 0
     },
@@ -235,21 +235,21 @@ export class D3GraphComponent implements OnInit {
 
   drawGraph(chartArea, myData, leggend) {
 
-    var myDates=[];
-    var values=[];
+    var myDates = [];
+    var values = [];
     console.log("tttt");
     console.log(myData[0]['donnees'].length);
-    for(var i=0; i<myData.length;i++){
-      for(var j=0; j<myData[i]['donnees'].length;j++){
+    for (var i = 0; i < myData.length; i++) {
+      for (var j = 0; j < myData[i]['donnees'].length; j++) {
         myDates.push(myData[i]['donnees'][j]['jour']);
-        values.push(myData[i]['donnees'][j]['nb'])
+        values.push(myData[i]['donnees'][j]['nb']);
       }
     }
-   
+
     console.log(myDates);
     var marginA = { top: 40, right: 20, bottom: 130, left: 100 },
       marginA2 = { top: 700, right: 20, bottom: 30, left: 100 },
-      widthA = +1200 - marginA.left - marginA.right,
+      widthA = +1000 - marginA.left - marginA.right,
       heightA = +800 - marginA.top - marginA.bottom,
       heightA2 = +800 - marginA2.top - marginA2.bottom;
 
@@ -287,6 +287,19 @@ export class D3GraphComponent implements OnInit {
         focus.selectAll('.line').attr('d', line);
         focus.selectAll('.axis--x').call(d3.axisBottom(xA));
 
+      });
+
+    var zoom = d3.zoom()
+      .scaleExtent([1, Infinity])
+      .translateExtent([[0, 0], [widthA, heightA]])
+      .extent([[0, 0], [widthA, heightA]])
+      .on("zoom", function () {
+        if (d3.event.sourceEvent && d3.event.sourceEvent.type === "brush") return; // ignore zoom-by-brush
+        var t = d3.event.transform;
+        xA.domain(t.rescaleX(xA2).domain());
+        focus.selectAll(".line").attr("d", line);
+        focus.selectAll(".axis--x").call(d3.axisBottom(xA));
+        context.selectAll(".brush").call(brush.move, xA.range().map(t.invertX, t));
       });
 
     var line = d3.line()
@@ -377,6 +390,53 @@ export class D3GraphComponent implements OnInit {
       .attr('class', 'brush')
       .call(brush)
       .call(brush.move, xA.range());
+
+    svgA.append("rect")
+      .attr("class", "zoom")
+      .attr("width", widthA)
+      .attr("height", heightA)
+      .attr("transform", "translate(" + marginA.left + "," + marginA.top + ")")
+      .on('mouseout', function() { // on mouse out hide line, circles and text
+        d3.selectAll(".mouse-per-line circle")
+          .style("opacity", "0");
+        d3.selectAll(".mouse-per-line text")
+          .style("opacity", "0");
+      })
+      .on('mouseover', function() { // on mouse in show line, circles and text
+        d3.selectAll(".mouse-per-line circle")
+          .style("opacity", "1");
+        d3.selectAll(".mouse-per-line text")
+          .style("opacity", "1");
+      })
+      .style("cursor", "move")
+      .style("fill", "none")
+      .style("pointer-events", "all")
+      .call(zoom);
+    
+
+      console.log(svgA);
+      var legend = svgA.selectAll(".legend")
+      .data(myData)
+      .enter().append("g")
+      .attr("class", "legend");
+  
+    for(var i = 0; i<myData.length; i++){
+  
+      legend.append("rect")
+        .attr("x", widthA+100)
+        .attr("y", i * 25 + 30)
+        .attr("width", 18)
+        .attr("height", 18)
+        .style("fill", colorFill(String(i)));
+  
+      legend.append("text")
+        .attr("x", widthA+125)
+        .attr("y", i * 25 + 39)
+        .attr("dy", ".35em")
+        .style("text-anchor", "start")
+        .style("fill",colorFill(String(i)) )
+        .text(myData[i]['annee']);
+    }
   }
 
 }
