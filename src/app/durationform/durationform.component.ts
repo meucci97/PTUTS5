@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
-  selector: 'app-periodeform',
+  selector: 'app-durationform',
   templateUrl: './durationform.component.html',
   styleUrls: ['./durationform.component.css']
 })
@@ -14,8 +14,8 @@ export class DurationformComponent implements OnInit {
 
   ngOnInit() {
     this.DurationForm = this.formBuilder.group({
-      periodeDebut: '2012-01-01',
-      periodeFin: '2017-01-01',
+      durationDebut: '2012-01-01',
+      durationFin: '2017-01-01',
     });
   }
 

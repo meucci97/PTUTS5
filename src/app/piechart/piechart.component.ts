@@ -27,7 +27,7 @@ export class PiechartComponent implements OnInit {
     { "nb": 6, "region": "Corse" },
     { "nb": 25, "region": "Grand Est" },
     { "nb": 3, "region": "Hauts-de-France" },
-    { "nb": 90, "region": "Île-de-France" },
+    { "nb": 20, "region": "Île-de-France" },
     { "nb": 44, "region": "Normandie" },
     { "nb": 33, "region": "Nouvelle-Aquitaine" },
     { "nb": 7, "region": "Pays de la Loire" },

@@ -1,12 +1,12 @@
-<form [formGroup]="PeriodeForm" (ngSubmit)="sendData(PeriodeForm.value)">
+<form [formGroup]="DurationForm" (ngSubmit)="sendData(DurationForm.value)">
 
   <div class="form-group">
 
-    <label for="periodeDebut">Période de début</label>
-    <input type="date" name="periodeDebut" [value]="PeriodeForm.periodeDebut.value" class="form-control" formControlName="periodeDebut">
+    <label for="durationDebut">Période de début</label>
+    <input type="date" name="durationDebut" [value]="DurationForm.durationDebut.value" class="form-control" formControlName="durationDebut">
     
-    <label for="periodeFin">Période de fin</label>
-    <input type="date" name="periodeFin" class="form-control" [value]="PeriodeForm.periodeFin.value" formControlName="periodeFin">
+    <label for="durationFin">Période de fin</label>
+    <input type="date" name="periodeFin" class="form-control" [value]="DurationForm.durationFin.value" formControlName="durationFin">
 
   </div>
 
