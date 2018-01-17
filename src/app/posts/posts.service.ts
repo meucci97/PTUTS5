@@ -20,8 +20,9 @@ export class PostsService {
       return this.http.get("/api/accidents");
     }
 
-    getAccPieChart() {
-      return this.http.get("api/graph4");
+    getAccPieChart(dateStart, dateEnd) {
+      console.log("api/graph4?dateEnd=" + dateEnd + "&dateStart=" + dateStart);
+      return this.http.get("api/graph4?dateEnd=" + dateEnd + "&dateStart=" + dateStart);
     }
     getBarChart(dateStart, dateEnd) {
       console.log(dateStart);

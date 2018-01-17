@@ -17,7 +17,7 @@ export class PiechartComponent implements OnInit {
   widthPieChart = 300;
   heightPieChart = 300;
 
-  accidents: Array<any>;
+  /*accidents: Array<any>;
 
   dataset = [
     { nb: 5, region: "Auvergne-Rhône-Alpes" },
@@ -33,27 +33,36 @@ export class PiechartComponent implements OnInit {
     { nb: 7, region: "Pays de la Loire" },
     { nb: 12, region: "Provence-Alpes-Côte d'Azur" },
     { nb: 27, region: "Occitanie" }
-];
+  ];*/
 
   constructor(private _postService: PostsService) { }
 
   ngOnInit() {
-    this._postService.getAccPieChart().subscribe((data: any[]) => {
-      //this.accidents = data['data'];
-      //console.log(this.accidents);
-      //this.afficherPieChart();
+    this._postService.getAccPieChart('2016-01-01', '2016-01-01').subscribe((data: any[]) => {
+      this.afficherPieChart(data);
     });
-
-    this.afficherPieChart();
   }
 
-  afficherPieChart() {
+  onDataload(myData: Array<any>) {
+    console.log(myData['durationDebut']);
+    console.log(myData['durationFin']);
+    
+    this._postService.getAccPieChart(myData['durationDebut'], myData['durationFin']).subscribe((data: any[]) => {
+      this.afficherPieChart(data);
+    });
+
+    console.log('MyGraph');
+  }
+
+  afficherPieChart(data) {
     var myValues=[];
-    var myRegion=[];
-    for(var i=0;i<this.dataset.length;i++){
-      myValues.push(this.dataset[i]['nb']);
-      myRegion.push(this.dataset[i]['region'])
+    var myRegions=[];
+    for(var i=0;i<data.length;i++){
+      myValues.push(data[i]['count']);
+      myRegions.push(data[i]['label']);
     }
+    console.log(myValues);
+    console.log(myRegions);
 
     var svg = d3.select("svg")
       .attr("width", this.width)
@@ -67,7 +76,6 @@ export class PiechartComponent implements OnInit {
 
     var pie = d3.pie();
    
-
     var color = d3.scaleOrdinal(d3.schemeCategory10);
 
     var arcs = svg.selectAll("g.arc")
@@ -94,7 +102,7 @@ export class PiechartComponent implements OnInit {
       });
 
     var legende = svg.selectAll(".legend")
-      .data(pie(myRegion))
+      .data(pie(myRegions))
       .enter()
       .append("g")
       .attr("transform", function (d, i) {
