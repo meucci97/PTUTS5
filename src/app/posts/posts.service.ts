@@ -38,6 +38,10 @@ export class PostsService {
       return this.http.get("api/graph5?dateEnd="+dateEnd+"&dateStart="+dateStart);
     }
 
+    getAccDonutChart(dateStart, dateEnd) {
+      return this.http.get("api/graph6?dateEnd=" + dateEnd + "&dateStart=" + dateStart);
+    }
+
     sendParam(){
       return this.http.get("/api/toto", { params: new HttpParams().set('id','3')})
     }

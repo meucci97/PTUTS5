@@ -9,6 +9,7 @@ import {D3GraphComponent} from './d3-graph/d3-graph.component';
 import {PiechartComponent} from './piechart/piechart.component';
 import {Graph1BarChartComponent} from './graph1-bar-chart/graph1-bar-chart.component';
 import {Graph5BarChartComponent} from './graph5-bar-chart/graph5-bar-chart.component';
+import {InfrastructuresChartComponent} from './infrastructures-chart/infrastructures-chart.component';
 const routes: Routes = [
   {
     path: 'posts',
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'nbAccidentCollision',
     component: Graph5BarChartComponent
+  },
+  {
+    path: 'nbAccidentsInfrastructures',
+    component: InfrastructuresChartComponent
   }
 ];
 
