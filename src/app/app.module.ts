@@ -16,6 +16,7 @@ import { BarchartComponent } from './barchart/barchart.component';
 import { PiechartComponent } from './piechart/piechart.component';
 import { DurationformComponent } from './durationform/durationform.component';
 import { Graph1BarChartComponent } from './graph1-bar-chart/graph1-bar-chart.component';
+import { Graph5BarChartComponent } from './graph5-bar-chart/graph5-bar-chart.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { Graph1BarChartComponent } from './graph1-bar-chart/graph1-bar-chart.com
     BarchartComponent,
     PiechartComponent,
     DurationformComponent,
-    Graph1BarChartComponent
+    Graph1BarChartComponent,
+    Graph5BarChartComponent
   ],
   imports: [
     BrowserModule,

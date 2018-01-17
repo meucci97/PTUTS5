@@ -24,11 +24,18 @@ export class PostsService {
       console.log("api/graph4?dateEnd=" + dateEnd + "&dateStart=" + dateStart);
       return this.http.get("api/graph4?dateEnd=" + dateEnd + "&dateStart=" + dateStart);
     }
-    getBarChart(dateStart, dateEnd) {
+    getBarChartGraph1(dateStart, dateEnd) {
       console.log(dateStart);
       console.log(dateEnd);
       console.log("api/graph1?dateEnd="+dateEnd+"&dateStart="+dateStart);
       return this.http.get("api/graph1?dateEnd="+dateEnd+"&dateStart="+dateStart);
+    }
+
+    getBarChartGraph2(dateStart, dateEnd) {
+      console.log(dateStart);
+      console.log(dateEnd);
+      console.log("api/graph1?dateEnd="+dateEnd+"&dateStart="+dateStart);
+      return this.http.get("api/graph5?dateEnd="+dateEnd+"&dateStart="+dateStart);
     }
 
     sendParam(){

@@ -2,25 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import * as d3scale from 'd3-scale';
 import { PostsService } from '../posts/posts.service';
-@Component({
-  selector: 'app-graph1-bar-chart',
-  templateUrl: './graph1-bar-chart.component.html',
-  styleUrls: ['./graph1-bar-chart.component.css']
-})
-export class Graph1BarChartComponent implements OnInit {
 
+@Component({
+  selector: 'app-graph5-bar-chart',
+  templateUrl: './graph5-bar-chart.component.html',
+  styleUrls: ['./graph5-bar-chart.component.css']
+})
+export class Graph5BarChartComponent implements OnInit {
+
+  onDataload(myData: Array<any>) {
+    console.log(myData['durationDebut']);
+    console.log(myData['durationFin']);
+    this._postService.getBarChartGraph2(myData['durationDebut'], myData['durationFin']).subscribe((data: any[]) => {
+      // Read the result field from the JSON response.
+      this.chartStackNegativeCreate('chartStackedNegative', data);
+    });
+
+  }
   constructor(private _postService: PostsService) { }
 
   ngOnInit() {
   }
 
-  onDataload(myData: Array<any>) {
-    console.log(myData['durationDebut']);
-    console.log(myData['durationFin']);
-    this._postService.getBarChartGraph1(myData['durationDebut'], myData['durationFin']).subscribe((data: any[]) => {
-      this.chartStackNegativeCreate('chartStackedNegative', data);
-    });
-  }
   chartStackNegativeCreate(chartStackNegative, dataSN){
     var categories=[];
     var myData=[];
@@ -35,7 +38,6 @@ export class Graph1BarChartComponent implements OnInit {
       tmp['label']=dataSN[i]['label'];
       for(var j=0; j<dataSN[i]['data'].length;j++){ 
         tmp[categories[j]]= dataSN[i]['data'][j]['count'];
-        
       }
     myData.push(tmp);
     }
@@ -45,9 +47,10 @@ export class Graph1BarChartComponent implements OnInit {
         .offset(d3.stackOffsetDiverging)
         (myData);
   
+    
     var svgSN = d3.select('svg.'+chartStackNegative),
         marginSN = {top: 20, right: 30, bottom: 30, left: 60},
-        widthSN = +1000,
+        widthSN = +1100,
         heightSN = +500;
   
     var xSN = d3.scaleBand()
