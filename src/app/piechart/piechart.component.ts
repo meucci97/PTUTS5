@@ -52,6 +52,8 @@ export class PiechartComponent implements OnInit {
   }
 
   afficherPieChart(data) {
+    d3.selectAll("svg > *").remove();
+    
     var myValues=[];
     var myRegions=[];
     for(var i=0;i<data.length;i++){
