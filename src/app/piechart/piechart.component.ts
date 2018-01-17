@@ -38,9 +38,6 @@ export class PiechartComponent implements OnInit {
   constructor(private _postService: PostsService) { }
 
   ngOnInit() {
-    this._postService.getAccPieChart('2016-01-01', '2016-01-01').subscribe((data: any[]) => {
-      this.afficherPieChart(data);
-    });
   }
 
   onDataload(myData: Array<any>) {
