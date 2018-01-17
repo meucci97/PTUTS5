@@ -1,11 +1,11 @@
 'use strict';
 let features = require('../database/features');
 let collisions = {
-  1:"Deux véhicules - frontale",
-  2:"Deux véhicules – par l’arrière ",
-  3:"Deux véhicules – par le coté",
-  4:"Trois véhicules et plus – en chaîne",
-  5:"Trois véhicules et plus - collisions multiples",
+  1:"2 véhicules - frontale",
+  2:"2 véhicules – par l’arrière ",
+  3:"2 véhicules – par le coté",
+  4:"3 >=véhicules – en chaîne",
+  5:"3 >=véhicules - collisions multiples",
   6:"Autre collision ",
   7:"Sans collision"
 };

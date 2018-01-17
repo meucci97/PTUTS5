@@ -40,7 +40,7 @@ export class BarchartComponent implements OnInit {
   onDataload(myData: Array<any>) {
     console.log(myData['durationDebut']);
     console.log(myData['durationFin']);
-    this._postService.getBarChart(myData['durationDebut'], myData['durationFin']).subscribe((data: any[]) => {
+    this._postService.getBarChartGraph2(myData['durationDebut'], myData['durationFin']).subscribe((data: any[]) => {
       // Read the result field from the JSON response.
       console.log("yes");
       console.log(data);
@@ -83,7 +83,7 @@ export class BarchartComponent implements OnInit {
       
       var svgSN = d3.select('svg.'+chartStackNegative),
           marginSN = {top: 20, right: 30, bottom: 30, left: 60},
-          widthSN = +1000,
+          widthSN = +1100,
           heightSN = +500;
     
       var xSN = d3.scaleBand()
