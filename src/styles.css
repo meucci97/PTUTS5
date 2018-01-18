@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 .titre {
-    margin: 20px;
+    margin-top: 25px;
+}
+
+.svg {
+    text-align: center;
 }

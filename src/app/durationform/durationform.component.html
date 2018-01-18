@@ -1,17 +1,21 @@
 <form [formGroup]="DurationForm" (ngSubmit)="sendData(DurationForm.value)">
 
-  <div class="form-group">
-
-    <label for="durationDebut">Période de début</label>
-    <input type="date" min="2012-01-01" max="2016-12-31" name="durationDebut" [value]="DurationForm.durationDebut.value" class="form-control" formControlName="durationDebut">
-    
-    <label for="durationFin">Période de fin</label>
-    <input type="date" min="2012-01-01" max="2016-12-31" name="durationFin" class="form-control" [value]="DurationForm.durationFin.value" formControlName="durationFin">
-
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="durationDebut"><b>Période de début</b></label>
+      <input type="date" min="2012-01-01" max="2016-12-31" name="durationDebut" [value]="DurationForm.durationDebut.value" class="form-control"
+        formControlName="durationDebut">
+    </div>
+    <div class="form-group col-md-5">
+      <label for="durationFin"><b>Période de fin</b></label>
+      <input type="date" min="2012-01-01" max="2016-12-31" name="durationFin" class="form-control" [value]="DurationForm.durationFin.value"
+        formControlName="durationFin">
+    </div>
+    <div class="form-group col-md-2">
+        <label for=""><b>Recharger le graphique</b></label>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i>
+        </button>
+      </div>
   </div>
-
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary">Recharger le graphique</button>
-  </div>
-
+  
 </form>

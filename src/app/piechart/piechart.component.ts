@@ -17,38 +17,15 @@ export class PiechartComponent implements OnInit {
   widthPieChart = 300;
   heightPieChart = 300;
 
-  /*accidents: Array<any>;
-
-  dataset = [
-    { nb: 5, region: "Auvergne-Rhône-Alpes" },
-    { nb: 10, region: "Bourgogne-Franche-Comté" },
-    { nb: 14, region: "Bretagne" },
-    { nb: 45, region: "Centre-Val de Loire" },
-    { nb: 6, region: "Corse" },
-    { nb: 25, region: "Grand Est" },
-    { nb: 3, region: "Hauts-de-France" },
-    { nb: 20, region: "Île-de-France" },
-    { nb: 44, region: "Normandie" },
-    { nb: 33, region: "Nouvelle-Aquitaine" },
-    { nb: 7, region: "Pays de la Loire" },
-    { nb: 12, region: "Provence-Alpes-Côte d'Azur" },
-    { nb: 27, region: "Occitanie" }
-  ];*/
-
   constructor(private _postService: PostsService) { }
 
   ngOnInit() {
   }
 
   onDataload(myData: Array<any>) {
-    console.log(myData['durationDebut']);
-    console.log(myData['durationFin']);
-    
     this._postService.getAccPieChart(myData['durationDebut'], myData['durationFin']).subscribe((data: any[]) => {
       this.afficherPieChart(data);
     });
-
-    console.log('MyGraph');
   }
 
   afficherPieChart(data) {
@@ -60,8 +37,6 @@ export class PiechartComponent implements OnInit {
       myValues.push(data[i]['count']);
       myRegions.push(data[i]['label']);
     }
-    console.log(myValues);
-    console.log(myRegions);
 
     var svg = d3.select("svg")
       .attr("width", this.width)

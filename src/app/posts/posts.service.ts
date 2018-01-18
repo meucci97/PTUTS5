@@ -21,7 +21,9 @@ export class PostsService {
     }
 
     getAccPieChart(dateStart, dateEnd) {
-      return this.http.get("api/graph4?dateEnd=" + dateEnd + "&dateStart=" + dateStart);
+      return this.http.get("api/graph4", {
+        params:new HttpParams().set('dateEnd', dateEnd).set('dateStart', dateStart),
+      });
     }
     getBarChartGraph1(dateStart, dateEnd) {
 
@@ -49,7 +51,9 @@ export class PostsService {
     }
 
     getAccDonutChart(dateStart, dateEnd) {
-      return this.http.get("api/graph4?dateEnd=" + dateEnd + "&dateStart=" + dateStart);
+      return this.http.get("api/graph3", {
+        params:new HttpParams().set('dateEnd', dateEnd).set('dateStart', dateStart),
+      });
     }
 
     sendParam(){

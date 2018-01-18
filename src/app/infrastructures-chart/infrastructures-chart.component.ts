@@ -23,14 +23,9 @@ export class InfrastructuresChartComponent implements OnInit {
   }
 
   onDataload(myData: Array<any>) {
-    console.log(myData['durationDebut']);
-    console.log(myData['durationFin']);
-    
     this._postService.getAccDonutChart(myData['durationDebut'], myData['durationFin']).subscribe((data: any[]) => {
       this.afficherDonutChart(data);
     });
-
-    console.log('MyGraph');
   }
 
   afficherDonutChart(data) {
@@ -42,8 +37,6 @@ export class InfrastructuresChartComponent implements OnInit {
       myValues.push(data[i]['count']);
       myRegions.push(data[i]['label']);
     }
-    console.log(myValues);
-    console.log(myRegions);
 
     var svg = d3.select("svg")
       .attr("width", this.width)
