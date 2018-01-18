@@ -37,6 +37,8 @@ export class BarchartComponent implements OnInit {
 
   countries = ["France", "Germany", "Austria", "Belgium", "Netherlands", 'Spain', 'Portugal', 'Italy', 'UK', 'Switzerland'];
 
+  titre = "Titre"
+
   onDataload(myData: Array<any>) {
     console.log(myData['durationDebut']);
     console.log(myData['durationFin']);
