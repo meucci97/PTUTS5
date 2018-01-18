@@ -18,6 +18,7 @@ import { DurationformComponent } from './durationform/durationform.component';
 import { Graph1BarChartComponent } from './graph1-bar-chart/graph1-bar-chart.component';
 import { Graph5BarChartComponent } from './graph5-bar-chart/graph5-bar-chart.component';
 import { InfrastructuresChartComponent } from './infrastructures-chart/infrastructures-chart.component';
+import { Graph2LineChartComponent } from './graph2-line-chart/graph2-line-chart.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { InfrastructuresChartComponent } from './infrastructures-chart/infrastru
     DurationformComponent,
     Graph1BarChartComponent,
     Graph5BarChartComponent,
-    InfrastructuresChartComponent
+    InfrastructuresChartComponent,
+    Graph2LineChartComponent
   ],
   imports: [
     BrowserModule,
