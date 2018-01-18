@@ -90,6 +90,24 @@ router.get('/graph2', function (req, res){
     });
 });
 
+router.get('/graph3', function (req, res){
+  let dateEnd = req.query.dateEnd;
+  let dateStart = req.query.dateStart;
+  if(checkDate(dateEnd) && checkDate(dateStart)){
+    dateEnd = new Date(dateEnd);
+    dateStart = new Date(dateStart);
+  } else {
+    res.status(400).send({"error": "Date invalid"});
+  }
+  features.graph3(dateStart,dateEnd)
+    .then(function(results) {
+      res.send(results);
+    })
+    .catch(function (err) {
+      res.status(500).send({err: err});
+    });
+});
+
 router.get('/accidents', function (req, res){
   // Check if the client asked for json
   if (req.accepts('application/json')) {
