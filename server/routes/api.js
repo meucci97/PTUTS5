@@ -81,6 +81,9 @@ router.get('/graph2', function (req, res){
   let monthEnd = req.query.monthEnd;
   let monthStart = req.query.monthStart;
   let years = req.query.years;
+  if(typeof years === "string") {
+    years = years.split(',');
+  }
   features.graph2(monthStart,monthEnd, years)
     .then(function(results) {
       res.send(results);
