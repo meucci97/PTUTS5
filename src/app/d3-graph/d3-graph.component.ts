@@ -264,8 +264,12 @@ export class D3GraphComponent implements OnInit {
 
     var myDates = [];
     var values = [];
+    var cumul=0;
     for (var i = 0; i < myData.length; i++) {
+      cumul=0;
       for (var j = 0; j < myData[i]['data'].length; j++) {
+        cumul=cumul+ myData[i]['data'][j]['count'];
+        myData[i]['data'][j]['count']=cumul;
         myData[i]['data'][j]['label']=new Date(myData[i]['data'][j]['label']);
         myData[i]['data'][j]['label'].setFullYear(2018);
         //myData[i]['data'][j]['label'].setHours(myData[i]['data'][j]['label'].getUTCHours()+3);
