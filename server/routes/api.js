@@ -125,7 +125,8 @@ router.get('/accidents', function (req, res){
         let accidents = results.rows;
         let attrToSort = req.query.attrSort;
         let sorted = (req.query.sort === 'A') ? sorts.mergingSort(accidents, attrToSort) : sorts.selectionSort(accidents, attrToSort);
-        response.data=sorted;
+        response.sortedTime = sorted.time;
+        response.data = sorted.data;
         res.json(response);
       })
       .catch(function (err) {

@@ -7,17 +7,19 @@ exports.mergingSort = function (data, attrToSort) {
   //data = tableau d'objet
   //attrToSort = le nom de l'attribut sur lequel il faut trier
 
-  var startTime = Date.now();
-  var elapsedTime = 0;
+  let startTime = Date.now();
+  let elapsedTime;
 
-  var sortedData = mergingSortPrivate(data, attrToSort);
+  let sortedData = mergingSortPrivate(data, attrToSort);
 
   elapsedTime = Date.now() - startTime;
 
   console.log('Tri Fusion executé en '+elapsedTime+ 'ms');
 
-  return sortedData;
-
+  return {
+    "data": sortedData,
+    "time": elapsedTime
+  };
 };
 
 function mergingSortPrivate(data, attrToSort){
@@ -26,13 +28,13 @@ function mergingSortPrivate(data, attrToSort){
     return data;
   }
   else{
-    var sortedData  = [];
-    var tab1 = mergingSortPrivate( data.slice(0,(data.length/2)), attrToSort);
-    var tab2 = mergingSortPrivate(data.slice(data.length/2,data.length), attrToSort);
+    let sortedData = [];
+    let tab1 = mergingSortPrivate(data.slice(0, (data.length / 2)), attrToSort);
+    let tab2 = mergingSortPrivate(data.slice(data.length / 2, data.length), attrToSort);
 
-    var smallest;
-    var length = data.length;
-    for(var i = 0; i < length; i++){
+    let smallest;
+    let length = data.length;
+    for(let i = 0; i < length; i++){
       smallest = tab1[0]===undefined ? tab2.splice(0,1) : tab2[0]===undefined? tab1.splice(0,1) : tab1[0][attrToSort]>tab2[0][attrToSort]? tab2.splice(0,1):tab1.splice(0,1) ;
       sortedData.push(smallest[0]);
     }
@@ -47,33 +49,34 @@ exports.selectionSort = function (data, attrToSort) {
   //data = tableau d'objet
   //attrToSort = le nom de l'attribut sur lequel il faut trier
 
-  var startTime = Date.now();
-  var elapsedTime = 0;
+  let startTime = Date.now();
+  let elapsedTime;
 
-  var sortedData = selectionSortPrivate(data, attrToSort);
+  let sortedData = selectionSortPrivate(data, attrToSort);
 
   elapsedTime = Date.now() - startTime;
 
   console.log('Tri par sélection executé en '+elapsedTime+ 'ms');
 
-  return sortedData;
-
-  return data;
+  return {
+    "data": sortedData,
+    "time": elapsedTime
+  };
 };
 
 function selectionSortPrivate(data, attrToSort){
 
-  var smallestIndex;
-  var length = data.length;
+  let smallestIndex;
+  let length = data.length;
 
-  for(var indexTri=0; indexTri < length; indexTri++){
+  for(let indexTri=0; indexTri < length; indexTri++){
     smallestIndex = indexTri;
 
-    for(var i = indexTri; i < length; i++){
+    for(let i = indexTri; i < length; i++){
       smallestIndex = data[smallestIndex][attrToSort]>data[i][attrToSort]? i:smallestIndex;
 
     }
-    var b = data[indexTri];
+    let b = data[indexTri];
     data[indexTri] = data[smallestIndex];
     data[smallestIndex] = b;
 
