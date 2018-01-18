@@ -1,13 +1,26 @@
+<div class="jumbotron">
+  <h1 class="display-4 text-center titre">{{titre}}</h1>
+  <p class="lead text-center">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+</div>
+
 <div class="container">
-<form [formGroup]="TriData" (ngSubmit)="sendData(TriData.value)">
-  
-    <div class="form-group">
-      <label for="limit">Limites</label>
-      <input class="form-check-input" type="textbox" [formControlName]='limitInput'>
-    </div>
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Afficher les données</button>
+
+  <form>
+
+    <div class="form-row">
+
+      <div class="form-group col-md-5">
+        <label for="limit"><b>Limites</b></label>
+        <input class="form-control" type="text" id="limit" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+      </div>
+
+      <div class="form-group col-md-2">
+        <label for=""><b>Afficher les données</b></label>
+        <button type="submit" class="btn btn-primary"><i class="fa fa-refresh" aria-hidden="true"></i></button>
+      </div>
+
     </div>
 
   </form>
-  
+
+</div>

@@ -1,4 +1,4 @@
-import { Component, OnInit,} from '@angular/core';
+import { Component, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 @Component({
   selector: 'app-tri-view',
@@ -6,13 +6,11 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./tri-view.component.css']
 })
 export class TriViewComponent implements OnInit {
+  
+  titre = "Tri";
 
   constructor() { }
 
   ngOnInit() {
-  }
-  sendData(formData) {
-    console.log(formData);
-    
   }
 }

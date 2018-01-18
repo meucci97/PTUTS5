@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
 
   graphes = [
-    {titre: 'Graphe1', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"},
+    {titre: 'Accidents/Régions', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"},
     {titre: 'Graphe2', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"},
     {titre: 'Graphe3', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"},
     {titre: 'Graphe4', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"},
