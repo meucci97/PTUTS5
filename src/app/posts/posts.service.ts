@@ -39,7 +39,7 @@ export class PostsService {
     }
 
     getAccDonutChart(dateStart, dateEnd) {
-      return this.http.get("api/graph6?dateEnd=" + dateEnd + "&dateStart=" + dateStart);
+      return this.http.get("api/graph4?dateEnd=" + dateEnd + "&dateStart=" + dateStart);
     }
 
     sendParam(){
