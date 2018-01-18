@@ -87,7 +87,6 @@ router.get('/graph2', function (req, res){
   }
   features.graph2(monthStart,monthEnd, years)
     .then(function(results) {
-      console.log("toto");
       res.send(results);
     })
     .catch(function (err) {

@@ -1221,7 +1221,6 @@ exports.graph2 = function(monthStart, monthEnd, years) {
 
       years.forEach(function(year){
         date = new Date(year+"-"+monthStart+"-01");
-        console.log(date);
         filteredByYear = result.rows.filter(filterYear(year));
 
         yearData = {
@@ -1230,7 +1229,7 @@ exports.graph2 = function(monthStart, monthEnd, years) {
           "data" : []
         };
         date.setHours(date.getHours()+4);
-        console.log(date);
+
         do{
           filteredByDate = filteredByYear.filter(filterDate(date));
 
@@ -1240,7 +1239,7 @@ exports.graph2 = function(monthStart, monthEnd, years) {
           });
 
           date.setDate(date.getDate() + 1);
-        } while (date.getMonth()+1 <= monthEnd);
+        } while (date.getMonth()+1 <= monthEnd && date.getFullYear().toString() === year);
         returnData.push(yearData);
       });
 
