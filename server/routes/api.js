@@ -83,9 +83,11 @@ router.get('/graph2', function (req, res){
   let years = req.query.years;
   if(typeof years === "string") {
     years = years.split(',');
+    console.log(years);
   }
   features.graph2(monthStart,monthEnd, years)
     .then(function(results) {
+      console.log("toto");
       res.send(results);
     })
     .catch(function (err) {

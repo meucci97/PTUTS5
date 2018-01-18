@@ -2,271 +2,55 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { PostsService } from '../posts/posts.service';
 import * as d3 from 'd3';
 import * as d3scale from 'd3-scale';
-
 @Component({
-  selector: 'app-d3-graph',
-  templateUrl: './d3-graph.component.html',
-  styleUrls: ['./d3-graph.component.css'],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-graph2-line-chart',
+  templateUrl: './graph2-line-chart.component.html',
+  styleUrls: ['./graph2-line-chart.component.css']
 })
-export class D3GraphComponent implements OnInit {
-
-  titre = 'D3 Graph';
+export class Graph2LineChartComponent implements OnInit {
 
   onDataload(myData: Array<any>) {
 
-    var years= new Array();
+    var years = new Array();
 
-    if(myData['date2012']){
+    if (myData['date2012']) {
       years.push(2012);
     };
 
-    if(myData['date2013']){
+    if (myData['date2013']) {
       years.push(2013);
     };
 
-    if(myData['date2014']){
-      years.push(2014);      
+    if (myData['date2014']) {
+      years.push(2014);
     };
 
-    if(myData['date2015']){
+    if (myData['date2015']) {
       years.push(2015);
-      
+
     };
 
-    if(myData['date2016']){
-      years.push(2016); 
+    if (myData['date2016']) {
+      years.push(2016);
     };
-    if(years.length!=0){
+    if (years.length != 0) {
       this._postService.getLineChartGraph1(myData['periodeDebut'], myData['periodeFin'], years).subscribe((data: any[]) => {
         this.drawGraph('chart', data);
-    });
+      });
     }
-   
+
   }
 
   constructor(private _postService: PostsService) { }
-  value: Array<any>;
-  myArray: Array<any>;
-  scaleDate: Array<any>;
   ngOnInit() {
-
-    this._postService.getAcc().subscribe((data: any[]) => {
-      // Read the result field from the JSON response.
-      this.value = data['data'];
-
-      //this.toto();
-      //this.drawGraph('chart', this.tableTest2, this.tableAnne);
-    });
   }
-  ngAfterViewInit() {
-
-  }
-  toto() {
-
-    var colorLines = ['lightblue', 'lightgreen', 'yellow', 'steelblue', 'red'];
-    this.scaleDate = []
-    this.myArray = [];
-    for (var i = 0; i < this.value.length; i++) {
-      this.myArray.push({ 'date': new Date(2018, 0, (i + 1)), 'nbacc': i });
-      this.scaleDate.push(new Date(2018, 0, (i + 1)));
-    }
-
-    var margin = { top: 40, right: 50, bottom: 50, left: 50 },
-      width = +((document.getElementById('graph').offsetWidth) - margin.left - margin.right),
-      //width =+500 - margin.left - margin.right,
-      height = +(600 - margin.top - margin.bottom);
-
-
-    var svg = d3.select('svg')
-      .attr('width', 1200)
-      .attr('height', 1200)
-      .append('g')
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-
-    var g = svg.append('g')
-      .attr('clip-path', 'url(#clip)')
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
-
-    var x = d3.scaleTime()
-      .range([-1, width]);
-
-    x.domain([
-      d3.min(this.scaleDate),
-      d3.max(this.scaleDate)
-    ]);
-    /*var x= d3.scaleLinear()
-    .range([height, 0]);
-    */
-    var yL = d3.scaleLinear()
-      .range([height * 1.3, 0]);
-
-    /*   x.domain([
-         d3.min(scaleDate),
-         d3.max(scaleDate)
-       ]);*/
-
-    yL.domain([d3.min(this.myArray, function (d) { return d.nbacc }), d3.max(this.myArray, function (d) { return d.nbacc })]);
-
-    var xAxis = d3.axisBottom(x);
-
-    var yAxisLeft = d3.axisLeft(yL)
-      .ticks(10)
-      .tickSize(-width);
-
-    var gX = svg.append('g')
-      .attr('class', 'x axis')
-      .attr('transform', 'translate(0,' + height + ')')
-      .call(xAxis);
-
-    var gYL = svg.append('g')
-      .attr('class', 'axis axis--y')
-      .call(yAxisLeft)
-
-    svg.append('text')
-      .attr('transform', 'rotate(-90)')
-      .attr('y', 6)
-      .attr('x', -5)
-      .attr('dy', '.71em')
-      .style('text-anchor', 'end')
-      .style('fill', '#00000')
-      .style('font-size', '12px')
-      .text('MW/h');
-
-    let line_energy = d3.line()
-      .x(function (d) {
-        return x(d['date']);
-      })
-      .y(function (d) {
-        return yL(d['nbacc']);
-      });
-
-
-    g.append('defs')
-      .append('clipPath')
-      .attr('id', 'clip')
-      .append('rect')
-      .attr('x', - margin.left)        // position the left of the rectangle
-      .attr('y', - margin.top - margin.bottom)
-      .attr('width', width)
-      .attr('height', height + margin.bottom + margin.top);
-
-    g.append('g')
-      .attr('class', 'charts')
-      .attr('id', 'monGraphEnergy')
-      .append('path')
-      .datum(this.myArray)
-      .attr('fill', 'none')
-      .attr('stroke', colorLines[0])
-      .attr('stroke-linejoin', 'round')
-      .attr('stroke-linecap', 'round')
-      .attr('stroke-width', 1.5)
-      .attr('d', function (d) {
-        return line_energy(d);
-      });
-
-  }
-  // tslint:disable-next-line:member-ordering
-  tableAnne = [2015, 2016];
-  tableTest2 = [{
-    annee: '2015', donnees: [{
-      jour: (new Date(2018, 0, (1))),
-      nb: 10
-    },
-    {
-      jour: (new Date(2018, 0, (2))),
-      nb: 20
-    },
-    {
-      jour: (new Date(2018, 0, (3))),
-      nb: 20
-    },
-    {
-      jour: (new Date(2018, 0, (4))),
-      nb: 40
-    },
-    {
-      jour: (new Date(2018, 0, (5))),
-      nb: 50
-    },
-    {
-      jour: (new Date(2018, 0, (6))),
-      nb: 70
-    }
-    ]
-  }, {
-    annee: '2016', donnees: [{
-      jour: (new Date(2018, 0, (1))),
-      nb: 0
-    },
-    {
-      jour: (new Date(2018, 0, (2))),
-      nb: 15
-    },
-    {
-      jour: (new Date(2018, 0, (3))),
-      nb: 35
-    },
-    {
-      jour: (new Date(2018, 0, (4))),
-      nb: 50
-    },
-    {
-      jour: (new Date(2018, 0, (5))),
-      nb: 60
-    },
-    {
-      jour: (new Date(2018, 0, (6))),
-      nb: 60
-    }
-    ]
-  }
-  ];
-
-  tableTest = [{
-    jour: (new Date(2018, 0, (1))), annees: [{
-      annee: '2015', nb: 10
-    }, { annee: '2016', nb: 20 }]
-  },
-  {
-    jour: (new Date(2018, 0, (2))), annees: [{
-      annee: '2015', nb: 20
-    }, { annee: '2016', nb: 30 }]
-  },
-  {
-    jour: (new Date(2018, 0, (3))), annees: [{
-      annee: '2015', nb: 20
-    }, { annee: '2016', nb: 30 }]
-  },
-  {
-    jour: (new Date(2018, 0, (4))), annees: [{
-      annee: '2015', nb: 35
-    }, { annee: '2016', nb: 35 }]
-  },
-  {
-    jour: (new Date(2018, 0, (5))), annees: [{
-      annee: '2015', nb: 50
-    }, { annee: '2016', nb: 40 }]
-  },
-  {
-    jour: (new Date(2018, 0, (6))), annees: [{
-      annee: '2015', nb: 55
-    }, { annee: '2016', nb: 50 }]
-  },
-  {
-    jour: (new Date(2018, 0, (7))), annees: [{
-      annee: '2015', nb: 60
-    }, { annee: '2016', nb: 65 }]
-  }];
-
   drawGraph(chartArea, myData) {
 
     var myDates = [];
     var values = [];
     for (var i = 0; i < myData.length; i++) {
       for (var j = 0; j < myData[i]['data'].length; j++) {
-        myData[i]['data'][j]['label']=new Date(myData[i]['data'][j]['label']);
+        myData[i]['data'][j]['label'] = new Date(myData[i]['data'][j]['label']);
         myData[i]['data'][j]['label'].setFullYear(2018);
         //myData[i]['data'][j]['label'].setHours(myData[i]['data'][j]['label'].getUTCHours()+3);
         myDates.push(myData[i]['data'][j]['label']);
@@ -358,7 +142,7 @@ export class D3GraphComponent implements OnInit {
 
     xA.domain(d3.extent(myDates));
     // tslint:disable-next-line:max-line-length
-    yA.domain([-5, Number(d3.max(values, function (d) { return d; })+10)]);
+    yA.domain([-5, Number(d3.max(values, function (d) { return d; }) + 10)]);
     xA2.domain(xA.domain());
     yA2.domain(yA.domain());
 
@@ -424,13 +208,13 @@ export class D3GraphComponent implements OnInit {
       .attr("width", widthA)
       .attr("height", heightA)
       .attr("transform", "translate(" + marginA.left + "," + marginA.top + ")")
-      .on('mouseout', function() { // on mouse out hide line, circles and text
+      .on('mouseout', function () { // on mouse out hide line, circles and text
         d3.selectAll(".mouse-per-line circle")
           .style("opacity", "0");
         d3.selectAll(".mouse-per-line text")
           .style("opacity", "0");
       })
-      .on('mouseover', function() { // on mouse in show line, circles and text
+      .on('mouseover', function () { // on mouse in show line, circles and text
         d3.selectAll(".mouse-per-line circle")
           .style("opacity", "1");
         d3.selectAll(".mouse-per-line text")
@@ -440,30 +224,31 @@ export class D3GraphComponent implements OnInit {
       .style("fill", "none")
       .style("pointer-events", "all")
       .call(zoom);
-    
 
-      var legend = svgA.selectAll(".legend")
+
+    var legend = svgA.selectAll(".legend")
       .data(myData)
       .enter().append("g")
       .attr("class", "legend");
-  
-    for(var i = 0; i<myData.length; i++){
-  
+
+    for (var i = 0; i < myData.length; i++) {
+
       legend.append("rect")
-        .attr("x", widthA+125)
+        .attr("x", widthA + 125)
         .attr("y", i * 25 + 30)
         .attr("width", 18)
         .attr("height", 18)
         .style("fill", colorFill(String(i)));
-  
+
       legend.append("text")
-        .attr("x", widthA+150)
+        .attr("x", widthA + 150)
         .attr("y", i * 25 + 39)
         .attr("dy", ".35em")
         .style("text-anchor", "start")
-        .style("fill",colorFill(String(i)) )
+        .style("fill", colorFill(String(i)))
         .text(myData[i]['label']);
     }
   }
+
 
 }

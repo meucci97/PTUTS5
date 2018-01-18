@@ -11,6 +11,7 @@ import {Graph1BarChartComponent} from './graph1-bar-chart/graph1-bar-chart.compo
 import {Graph5BarChartComponent} from './graph5-bar-chart/graph5-bar-chart.component';
 import {InfrastructuresChartComponent} from './infrastructures-chart/infrastructures-chart.component';
 import { HomeComponent } from './home/home.component';
+import {Graph2LineChartComponent} from './graph2-line-chart/graph2-line-chart.component';
 const routes: Routes = [
   {
     path: '',
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'nbAccidentsInfrastructures',
     component: InfrastructuresChartComponent
+  },
+  {
+    path: 'nbAccidentsParPeriode',
+    component: Graph2LineChartComponent
   }
 ];
 

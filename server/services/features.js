@@ -1221,6 +1221,7 @@ exports.graph2 = function(monthStart, monthEnd, years) {
 
       years.forEach(function(year){
         date = new Date(year+"-"+monthStart+"-01");
+        console.log(date);
         filteredByYear = result.rows.filter(filterYear(year));
 
         yearData = {
@@ -1228,7 +1229,8 @@ exports.graph2 = function(monthStart, monthEnd, years) {
           "count" : filteredByYear.length,
           "data" : []
         };
-
+        date.setHours(date.getHours()+4);
+        console.log(date);
         do{
           filteredByDate = filteredByYear.filter(filterDate(date));
 
