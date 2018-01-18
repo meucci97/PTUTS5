@@ -9,6 +9,9 @@ import * as d3scale from 'd3-scale';
   styleUrls: ['./graph3-line-chart.component.css']
 })
 export class Graph3LineChartComponent implements OnInit {
+ 
+  titre = "titre";
+ 
   onDataload(myData: Array<any>) {
 
     var years = new Array();

@@ -12,8 +12,8 @@ export class HomeComponent implements OnInit {
     {titre: 'Graphe2', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"},
     {titre: 'Graphe3', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"},
     {titre: 'Graphe4', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"},
-    //{titre: 'Graphe5', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"},
-    //{titre: 'Graphe6', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"}
+    {titre: 'Graphe5', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"},
+    {titre: 'Graphe6', explication: "Ceci est l'étude", image: "test.png", lien: "pie-chart"}
   ];
   
   constructor() { }

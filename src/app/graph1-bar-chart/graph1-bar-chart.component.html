@@ -1,5 +1,10 @@
-<h1 class="text-center titre">{{ titre }}</h1>
+<div class="jumbotron">
+    <h1 class="display-4 text-center titre">{{ titre }}</h1>
+    <p class="lead text-center">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+</div>
 
-<h3>Choix de la période</h3>
-<app-durationform (onDataload)="onDataload($event)"></app-durationform>
-<svg class="chartStackedNegative" ></svg>
+<div class="container">
+    <app-durationform (onDataload)="onDataload($event)"></app-durationform>
+
+    <svg class="chartStackedNegative"></svg>
+</div>

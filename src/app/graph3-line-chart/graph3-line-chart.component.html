@@ -1,9 +1,12 @@
-<div class="col-md-8">
-  <h3>Choix de la période</h3>
-  <app-chart-years-form (onDataload)="onDataload($event)"></app-chart-years-form>
+<div class="jumbotron">
+    <h1 class="display-4 text-center titre">{{ titre }}</h1>
+    <p class="lead text-center">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
 </div>
 
+<div class="container">
+    <app-chart-years-form (onDataload)="onDataload($event)"></app-chart-years-form>
 
-<div id="graph">
-  <svg class="chart"></svg>
+    <div id="graph">
+        <svg class="chart"></svg>
+      </div>
 </div>
