@@ -10,7 +10,12 @@ import {PiechartComponent} from './piechart/piechart.component';
 import {Graph1BarChartComponent} from './graph1-bar-chart/graph1-bar-chart.component';
 import {Graph5BarChartComponent} from './graph5-bar-chart/graph5-bar-chart.component';
 import {InfrastructuresChartComponent} from './infrastructures-chart/infrastructures-chart.component';
+import { HomeComponent } from './home/home.component';
 const routes: Routes = [
+  {
+    path: '',
+    component: HomeComponent
+  },
   {
     path: 'd3-graph',
     component: D3GraphComponent
