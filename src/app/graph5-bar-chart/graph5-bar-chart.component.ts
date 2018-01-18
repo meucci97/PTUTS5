@@ -10,7 +10,7 @@ import { PostsService } from '../posts/posts.service';
 })
 export class Graph5BarChartComponent implements OnInit {
 
-  titre = "Titre";
+  titre = "Collisions";
   
   onDataload(myData: Array<any>) {
     console.log(myData['durationDebut']);

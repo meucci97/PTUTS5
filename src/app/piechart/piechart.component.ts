@@ -9,7 +9,7 @@ import * as d3 from "d3";
 })
 export class PiechartComponent implements OnInit {
 
-  titre = "Pie Chart";
+  titre = "Régions";
 
   width = 1000;
   height = 500;
