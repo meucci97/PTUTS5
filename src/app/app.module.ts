@@ -20,6 +20,7 @@ import { Graph5BarChartComponent } from './graph5-bar-chart/graph5-bar-chart.com
 import { InfrastructuresChartComponent } from './infrastructures-chart/infrastructures-chart.component';
 import { Graph2LineChartComponent } from './graph2-line-chart/graph2-line-chart.component';
 import { HomeComponent } from './home/home.component';
+import { Graph3LineChartComponent } from './graph3-line-chart/graph3-line-chart.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { HomeComponent } from './home/home.component';
     Graph5BarChartComponent,
     InfrastructuresChartComponent,
     Graph2LineChartComponent,
-    HomeComponent
+    HomeComponent,
+    Graph3LineChartComponent
   ],
   imports: [
     BrowserModule,

@@ -80,11 +80,6 @@ export class Graph2LineChartComponent implements OnInit {
     var yA2 = d3.scaleLinear().range([heightA2, 0]);
 
 
-    var xA = d3.scaleTime().range([0, widthA]);
-    var yA = d3.scaleLinear().range([heightA, 0]);
-    var xA2 = d3.scaleTime().range([0, widthA]);
-    var yA2 = d3.scaleLinear().range([heightA2, 0]);
-
     var xAxis = d3.axisBottom(xA),
       xAxis2 = d3.axisBottom(xA2),
       yAxis = d3.axisLeft(yA);
@@ -102,7 +97,7 @@ export class Graph2LineChartComponent implements OnInit {
       });
 
     var zoom = d3.zoom()
-      .scaleExtent([1, Infinity])
+      .scaleExtent([1, 20])
       .translateExtent([[0, 0], [widthA, heightA]])
       .extent([[0, 0], [widthA, heightA]])
       .on("zoom", function () {
