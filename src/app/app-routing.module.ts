@@ -12,10 +12,6 @@ import {Graph5BarChartComponent} from './graph5-bar-chart/graph5-bar-chart.compo
 import {InfrastructuresChartComponent} from './infrastructures-chart/infrastructures-chart.component';
 const routes: Routes = [
   {
-    path: 'posts',
-    component: PostsComponent
-  },
-  {
     path: 'd3-graph',
     component: D3GraphComponent
   },

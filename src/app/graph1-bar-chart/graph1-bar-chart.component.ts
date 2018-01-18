@@ -9,6 +9,8 @@ import { PostsService } from '../posts/posts.service';
 })
 export class Graph1BarChartComponent implements OnInit {
 
+  titre = "Titre"
+  
   constructor(private _postService: PostsService) { }
 
   ngOnInit() {
