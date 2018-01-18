@@ -13,7 +13,8 @@ export class NavBarComponent implements OnInit {
     {path: 'nbAccidentsCumulParPeriode', name: 'Accidents Cummul/Periode'},
     {path: 'nbAccidentHeure', name:"Accidents/Heure"},
     {path: 'nbAccidentCollision', name:"Accidents/Collision"},
-    {path: 'nbAccidentsInfrastructures', name: "Accidents/Infrastructures"}
+    {path: 'nbAccidentsInfrastructures', name: "Accidents/Infrastructures"},
+    {path: 'tri', name: "Resultat Tri"}
   ];
 
   constructor() {

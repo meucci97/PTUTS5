@@ -13,6 +13,7 @@ import {InfrastructuresChartComponent} from './infrastructures-chart/infrastruct
 import { HomeComponent } from './home/home.component';
 import {Graph2LineChartComponent} from './graph2-line-chart/graph2-line-chart.component';
 import {Graph3LineChartComponent} from './graph3-line-chart/graph3-line-chart.component';
+import {TriViewComponent} from './tri-view/tri-view.component';
 const routes: Routes = [
   {
     path: '',
@@ -49,6 +50,10 @@ const routes: Routes = [
   {
     path: 'nbAccidentsCumulParPeriode',
     component: Graph3LineChartComponent
+  },
+  {
+    path: 'tri',
+    component: TriViewComponent
   }
 ];
 

@@ -21,6 +21,7 @@ import { InfrastructuresChartComponent } from './infrastructures-chart/infrastru
 import { Graph2LineChartComponent } from './graph2-line-chart/graph2-line-chart.component';
 import { HomeComponent } from './home/home.component';
 import { Graph3LineChartComponent } from './graph3-line-chart/graph3-line-chart.component';
+import { TriViewComponent } from './tri-view/tri-view.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { Graph3LineChartComponent } from './graph3-line-chart/graph3-line-chart.
     InfrastructuresChartComponent,
     Graph2LineChartComponent,
     HomeComponent,
-    Graph3LineChartComponent
+    Graph3LineChartComponent,
+    TriViewComponent
   ],
   imports: [
     BrowserModule,
