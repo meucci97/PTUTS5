@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
@@ -7,9 +7,9 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./chart-years-form.component.css']
 })
 export class ChartYearsFormComponent implements OnInit {
-
+  @Output() onDataload = new EventEmitter<Array<any>>();
   chartYearsForm: FormGroup;
-
+  
   constructor(private formBuilder: FormBuilder) {
 
   }
@@ -51,6 +51,7 @@ export class ChartYearsFormComponent implements OnInit {
 
   sendData(formData) {
     console.log(formData);
+    this.onDataload.emit(formData);
   }
 
 }

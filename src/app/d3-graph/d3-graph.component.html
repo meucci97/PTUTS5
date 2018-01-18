@@ -1,7 +1,7 @@
 <h1 class="text-center titre">{{ titre }}</h1>
 <div class="col-md-8">
   <h3>Choix de la période</h3>
-  <app-chart-years-form></app-chart-years-form>
+  <app-chart-years-form (onDataload)="onDataload($event)"></app-chart-years-form>
 </div>
 
  

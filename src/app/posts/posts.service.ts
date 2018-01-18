@@ -28,14 +28,26 @@ export class PostsService {
       console.log(dateStart);
       console.log(dateEnd);
       console.log("api/graph1?dateEnd="+dateEnd+"&dateStart="+dateStart);
-      return this.http.get("api/graph1?dateEnd="+dateEnd+"&dateStart="+dateStart);
+      return this.http.get("api/graph1",{
+       params:new HttpParams().set('dateEnd',dateEnd).set('dateStart', dateStart),    
+      });
     }
 
     getBarChartGraph2(dateStart, dateEnd) {
       console.log(dateStart);
       console.log(dateEnd);
       console.log("api/graph1?dateEnd="+dateEnd+"&dateStart="+dateStart);
-      return this.http.get("api/graph5?dateEnd="+dateEnd+"&dateStart="+dateStart);
+      return this.http.get("api/graph5",{
+        params:new HttpParams().set('dateEnd',dateEnd).set('dateStart', dateStart),    
+       });
+    }
+    getLineChartGraph1(periodeStart,periodEnd,years){
+      console.log(periodeStart);
+      console.log(periodEnd);
+      console.log(years)
+      return this.http.get("api/graph2",{
+        params:new HttpParams().set('monthEnd',periodEnd).set('monthStart', periodeStart).set('years',years),    
+       });
     }
 
     sendParam(){

@@ -13,6 +13,41 @@ export class D3GraphComponent implements OnInit {
 
   titre = 'D3 Graph';
 
+  onDataload(myData: Array<any>) {
+    console.log('toto'+myData['periodeDebut']);
+    console.log('tata'+myData['periodeFin']);
+    console.log('titi'+myData['date2012']);
+    var years= new Array();
+
+    if(myData['date2012']){
+      years.push(2012);
+    };
+
+    if(myData['date2013']){
+      years.push(2013);
+    };
+
+    if(myData['date2014']){
+      years.push(2014);      
+    };
+
+    if(myData['date2015']){
+      years.push(2015);
+      
+    };
+
+    if(myData['date2016']){
+      years.push(2016); 
+    };
+    console.log(years);
+    if(years.length!=0){
+      this._postService.getLineChartGraph1(myData['periodeDebut'], myData['periodeFin'], years).subscribe((data: any[]) => {
+        this.drawGraph('chart', data);
+    });
+    }
+   
+  }
+
   constructor(private _postService: PostsService) { }
   value: Array<any>;
   myArray: Array<any>;
@@ -28,7 +63,7 @@ export class D3GraphComponent implements OnInit {
       console.log('test');
       console.log(this.tableTest2);
       //this.toto();
-      this.drawGraph('chart', this.tableTest2, this.tableAnne);
+      //this.drawGraph('chart', this.tableTest2, this.tableAnne);
     });
   }
   ngAfterViewInit() {
@@ -233,16 +268,15 @@ export class D3GraphComponent implements OnInit {
     }, { annee: '2016', nb: 65 }]
   }];
 
-  drawGraph(chartArea, myData, leggend) {
+  drawGraph(chartArea, myData) {
 
     var myDates = [];
     var values = [];
-    console.log("tttt");
-    console.log(myData[0]['donnees'].length);
+    console.log(myData[0]['data'].length);
     for (var i = 0; i < myData.length; i++) {
-      for (var j = 0; j < myData[i]['donnees'].length; j++) {
-        myDates.push(myData[i]['donnees'][j]['jour']);
-        values.push(myData[i]['donnees'][j]['nb']);
+      for (var j = 0; j < myData[i]['data'].length; j++) {
+        myDates.push(myData[i]['data'][j]['label']);
+        values.push(myData[i]['data'][j]['count']);
       }
     }
 
@@ -304,14 +338,14 @@ export class D3GraphComponent implements OnInit {
 
     var line = d3.line()
       .curve(d3.curveMonotoneX)
-      .x(function (d) { return xA(d['jour']); })
-      .y(function (d) { return yA(d['nb']); });
+      .x(function (d) { return xA(d['label']); })
+      .y(function (d) { return yA(d['count']); });
     // .y(function (d) { return yA((Object.values(d))[1]); });
 
     var line2 = d3.line()
       .curve(d3.curveMonotoneX)
-      .x(function (d) { return xA2(d['jour']); })
-      .y(function (d) { return yA2(d['nb']); });
+      .x(function (d) { return xA2(d['label']); })
+      .y(function (d) { return yA2(d['count']); });
     // .y(function (d) { return yA2((Object.values(d))[1]); });
 
     svgA.append('defs').append('clipPath')
@@ -336,7 +370,7 @@ export class D3GraphComponent implements OnInit {
 
     for (var i = 0; i < myData.length; i++) {
       var lineFill = focus.append('path')
-        .datum(myData[i]['donnees'])
+        .datum(myData[i]['data'])
         .attr('class', 'line linefocus')
         .attr('fill', 'none')
         .attr('stroke', colorFill(String(i)))
