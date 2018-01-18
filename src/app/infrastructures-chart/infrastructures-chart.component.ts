@@ -3,38 +3,20 @@ import { PostsService } from '../posts/posts.service';
 import * as d3 from "d3";
 
 @Component({
-  selector: 'app-piechart',
-  templateUrl: './piechart.component.html',
-  styleUrls: ['./piechart.component.css']
+  selector: 'app-infrastructures-chart',
+  templateUrl: './infrastructures-chart.component.html',
+  styleUrls: ['./infrastructures-chart.component.css']
 })
-export class PiechartComponent implements OnInit {
+export class InfrastructuresChartComponent implements OnInit {
 
-  titre = "Pie Chart";
+  titre = "Infrastructures";
 
   width = 1000;
   height = 350;
 
   widthPieChart = 300;
   heightPieChart = 300;
-
-  /*accidents: Array<any>;
-
-  dataset = [
-    { nb: 5, region: "Auvergne-Rhône-Alpes" },
-    { nb: 10, region: "Bourgogne-Franche-Comté" },
-    { nb: 14, region: "Bretagne" },
-    { nb: 45, region: "Centre-Val de Loire" },
-    { nb: 6, region: "Corse" },
-    { nb: 25, region: "Grand Est" },
-    { nb: 3, region: "Hauts-de-France" },
-    { nb: 20, region: "Île-de-France" },
-    { nb: 44, region: "Normandie" },
-    { nb: 33, region: "Nouvelle-Aquitaine" },
-    { nb: 7, region: "Pays de la Loire" },
-    { nb: 12, region: "Provence-Alpes-Côte d'Azur" },
-    { nb: 27, region: "Occitanie" }
-  ];*/
-
+  
   constructor(private _postService: PostsService) { }
 
   ngOnInit() {
@@ -44,14 +26,14 @@ export class PiechartComponent implements OnInit {
     console.log(myData['durationDebut']);
     console.log(myData['durationFin']);
     
-    this._postService.getAccPieChart(myData['durationDebut'], myData['durationFin']).subscribe((data: any[]) => {
-      this.afficherPieChart(data);
+    this._postService.getAccDonutChart(myData['durationDebut'], myData['durationFin']).subscribe((data: any[]) => {
+      this.afficherDonutChart(data);
     });
 
     console.log('MyGraph');
   }
 
-  afficherPieChart(data) {
+  afficherDonutChart(data) {
     d3.selectAll("svg > *").remove();
     
     var myValues=[];
@@ -68,7 +50,7 @@ export class PiechartComponent implements OnInit {
       .attr("height", this.height);
 
     var outerRadius = this.heightPieChart / 2;
-    var innerRadius = 0;
+    var innerRadius = this.heightPieChart / 3;
     var arc = d3.arc()
       .innerRadius(innerRadius)
       .outerRadius(outerRadius);

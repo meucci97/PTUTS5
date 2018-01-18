@@ -10,6 +10,16 @@ let collisions = {
   7:"Sans collision"
 };
 
+let infrastructures = {
+  1:"Souterrain - Tunnel",
+  2:"Pont",
+  3:"Bretelle d'échangeur ou de raccordement",
+  4:"Voie ferrée",
+  5:"Carrefour aménagé",
+  6:"Zone piétonne ",
+  7:"Zone de péage"
+};
+
 let regions = [
   {
     "label": "Alsace",
@@ -1194,6 +1204,16 @@ exports.graph4 = function(dateStart, dateEnd) {
     });
 };
 
+exports.graph3 = function(dateStart, dateEnd) {
+  return features.graph3(dateStart, dateEnd)
+    .then(function(result){
+      return countByInfra(result.rows);
+    })
+    .catch(function(err){
+      return {"err": err};
+    });
+};
+
 exports.graph2 = function(monthStart, monthEnd, years) {
   return features.graph2(monthStart, monthEnd, years)
     .then(function(result){
@@ -1247,6 +1267,27 @@ function countByRegion (data) {
   });
 
   return result;
+}
+
+function countByInfra (data) {
+  let result = [], filteredByInfra = [];
+  let i;
+
+  for (i = 0; i < 8; i++) {
+    filteredByInfra = data.filter(filterInfra(i));
+    result[i] = {
+      "label": infrastructures[i],
+      "count" : filteredByInfra.length
+    };
+  }
+
+  return result;
+}
+
+function filterInfra(infra) {
+  return function(item) {
+    return item["INFRA"] === infra;
+  };
 }
 
 function filterDepartments(departments) {

@@ -8,12 +8,12 @@ import {Component, OnInit} from '@angular/core';
 export class NavBarComponent implements OnInit {
 
   routes = [
-    {path: 'posts', name: 'Posts'},
     {path: 'd3-graph', name: 'Années'},
     {path: 'chart-bar', name: 'Bar Chart'},
     {path: 'pie-chart', name: 'Pie Chart'},
     {path: 'nbAccidentHeure', name:"Nombre d'accidents par heure"},
-    {path: 'nbAccidentCollision', name:"Nombre d'accidents par type de Collision"}
+    {path: 'nbAccidentCollision', name:"Nombre d'accidents par type de Collision"},
+    {path: 'nbAccidentsInfrastructures', name: "Accidents/Infrastructures"}
   ];
 
   constructor() {

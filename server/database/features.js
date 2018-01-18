@@ -98,7 +98,6 @@ exports.graph1 = function (dateStart, dateEnd) {
     "WHERE " + durationCondition(dateStart, dateEnd) +
     "GROUP BY USAGER.NUM_ACC,HRMM";
 
-console.log(query);
   return dbConfig.connect
     .then(function (conn) {
       return conn.execute(
@@ -202,6 +201,71 @@ exports.graph2 = function (monthStart, monthEnd, years) {
     query += " OR num_acc LIKE '" + year + "%'";
   });
   query += " ) ";
+
+  return dbConfig.connect
+    .then(function (conn) {
+      return conn.execute(
+        query
+        ,
+        []  // bind value for :id
+        , {
+          maxRows: parseInt(0)
+          , outFormat: oracledb.OBJECT  // query result format
+          , extendedMetaData: false   // get extra metadata
+          //, fetchArraySize: 100         // internal buffer allocation size for tuning
+        }
+      ).then(function (result) {
+        return result;
+      }).catch(function(err){
+        console.log(err);
+        return err;
+      });
+    })
+    .catch(function (err) {
+      console.error(err);
+      return {};
+    })
+
+};
+
+exports.graph3 = function (dateStart, dateEnd) {
+  let query =
+    "SELECT caracteristique.NUM_ACC, INFRA " +
+    "FROM caracteristique JOIN LIEUX ON CARACTERISTIQUE.NUM_ACC = LIEUX.NUM_ACC " +
+    "WHERE " + durationCondition(dateStart, dateEnd);
+
+  return dbConfig.connect
+    .then(function (conn) {
+      return conn.execute(
+        query
+        ,
+        []  // bind value for :id
+        , {
+          maxRows: parseInt(0)
+          , outFormat: oracledb.OBJECT  // query result format
+          , extendedMetaData: false   // get extra metadata
+          //, fetchArraySize: 100         // internal buffer allocation size for tuning
+        }
+      ).then(function (result) {
+        return result;
+      }).catch(function(err){
+        console.log(err);
+        return err;
+      });
+    })
+    .catch(function (err) {
+      console.error(err);
+      return {};
+    })
+
+};
+
+exports.graph10 = function (dateStart, dateEnd) {
+  let query =
+    "SELECT USAGER.NUM_ACC, SECU , GRAV " +
+    "FROM caracteristique JOIN USAGER ON CARACTERISTIQUE.NUM_ACC = USAGER.NUM_ACC " +
+    "WHERE " + durationCondition(dateStart, dateEnd) +
+    "AND SECU IS NOT NULL";
 
   return dbConfig.connect
     .then(function (conn) {

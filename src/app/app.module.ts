@@ -17,6 +17,7 @@ import { PiechartComponent } from './piechart/piechart.component';
 import { DurationformComponent } from './durationform/durationform.component';
 import { Graph1BarChartComponent } from './graph1-bar-chart/graph1-bar-chart.component';
 import { Graph5BarChartComponent } from './graph5-bar-chart/graph5-bar-chart.component';
+import { InfrastructuresChartComponent } from './infrastructures-chart/infrastructures-chart.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { Graph5BarChartComponent } from './graph5-bar-chart/graph5-bar-chart.com
     PiechartComponent,
     DurationformComponent,
     Graph1BarChartComponent,
-    Graph5BarChartComponent
+    Graph5BarChartComponent,
+    InfrastructuresChartComponent
   ],
   imports: [
     BrowserModule,

@@ -81,7 +81,28 @@ router.get('/graph2', function (req, res){
   let monthEnd = req.query.monthEnd;
   let monthStart = req.query.monthStart;
   let years = req.query.years;
+  if(typeof years === "string") {
+    years = years.split(',');
+  }
   features.graph2(monthStart,monthEnd, years)
+    .then(function(results) {
+      res.send(results);
+    })
+    .catch(function (err) {
+      res.status(500).send({err: err});
+    });
+});
+
+router.get('/graph3', function (req, res){
+  let dateEnd = req.query.dateEnd;
+  let dateStart = req.query.dateStart;
+  if(checkDate(dateEnd) && checkDate(dateStart)){
+    dateEnd = new Date(dateEnd);
+    dateStart = new Date(dateStart);
+  } else {
+    res.status(400).send({"error": "Date invalid"});
+  }
+  features.graph3(dateStart,dateEnd)
     .then(function(results) {
       res.send(results);
     })
