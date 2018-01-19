@@ -11,7 +11,7 @@ export class InfrastructuresChartComponent implements OnInit {
 
   titre = "Infrastructures";
 
-  width = 1000;
+  width = 1100;
   height = 500;
 
   widthPieChart = 500;

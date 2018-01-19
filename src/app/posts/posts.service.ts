@@ -16,10 +16,11 @@ export class PostsService {
       return this.http.get("/api/posts");
     }
 
-    getAcc(limit){
-      return this.http.get("/api/accidents", {
-        params: new HttpParams().set('dateEnd', limit).set('dateStart', limit),
-      });
+    getAccA(limit){
+      return this.http.get("/api/accidents?sort=A&attrSort=DEPA&limit="+limit);
+    }
+    getAccB(limit){
+      return this.http.get("/api/accidents?sort=B&attrSort=DEPA&limit="+limit);
     }
 
     getAccPieChart(dateStart, dateEnd) {

@@ -22,10 +22,16 @@ export class TriViewComponent implements OnInit {
   }
 
   sendData(formData) {
-    /*this._postService.getAcc(formData.limit).subscribe((data: any[]) => {
-    });*/
-    console.log(formData.limit);
-    this.triSelect='Vitesse Tri par selection';
-    this.triFusion='Vitesse Tri par fusion';
+    this._postService.getAccA(formData.limit).subscribe((data: any[]) => {
+    console.log(data);
+    this.triFusion='Vitesse Tri par fusion '+data['sortedTime']+'ms';
+    console.log(this.triFusion);
+    });
+    this._postService.getAccB(formData.limit).subscribe((data: any[]) => {
+      console.log(data);
+      this.triSelect='Vitesse Tri par selection '+data['sortedTime']+'ms';
+      console.log(this.triSelect);
+      });
+    
     }
 }
