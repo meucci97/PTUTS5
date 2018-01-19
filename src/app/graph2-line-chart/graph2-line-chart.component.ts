@@ -61,10 +61,10 @@ export class Graph2LineChartComponent implements OnInit {
     }
 
     var marginA = { top: 40, right: 20, bottom: 130, left: 100 },
-      marginA2 = { top: 700, right: 20, bottom: 30, left: 100 },
+      marginA2 = { top: 600, right: 20, bottom: 30, left: 100 },
       widthA = +1000 - marginA.left - marginA.right,
-      heightA = +800 - marginA.top - marginA.bottom,
-      heightA2 = +800 - marginA2.top - marginA2.bottom;
+      heightA = +700 - marginA.top - marginA.bottom,
+      heightA2 = +700 - marginA2.top - marginA2.bottom;
 
     var svgA = d3.select('svg.' + chartArea)
       .attr('width', 1200)

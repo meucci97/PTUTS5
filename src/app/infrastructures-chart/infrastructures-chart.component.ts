@@ -12,10 +12,10 @@ export class InfrastructuresChartComponent implements OnInit {
   titre = "Infrastructures";
 
   width = 1000;
-  height = 350;
+  height = 500;
 
-  widthPieChart = 300;
-  heightPieChart = 300;
+  widthPieChart = 500;
+  heightPieChart = 500;
   
   constructor(private _postService: PostsService) { }
 
@@ -33,9 +33,13 @@ export class InfrastructuresChartComponent implements OnInit {
     
     var myValues=[];
     var myRegions=[];
+        var cummul=0;
+    for(var i=0;i<data.length;i++){
+      cummul=cummul+data[i]['count'];
+    }
     for(var i=0;i<data.length;i++){
       myValues.push(data[i]['count']);
-      myRegions.push(data[i]['label']);
+      myRegions.push(data[i]['label']+" "+data[i]['count']+" sur "+cummul);
     }
 
     var svg = d3.select("svg")
@@ -65,7 +69,7 @@ export class InfrastructuresChartComponent implements OnInit {
       })
       .attr("d", <any>arc);
 
-    arcs.append("text")
+    /*arcs.append("text")
       .attr("transform", function (d) {
         return "translate(" + arc.centroid(<any>d) + ")";
       })
@@ -73,14 +77,14 @@ export class InfrastructuresChartComponent implements OnInit {
       .attr("fill", "white")
       .text(function (d) {
         return <any>d.data;
-      });
+      });*/
 
     var legende = svg.selectAll(".legend")
       .data(pie(myRegions))
       .enter()
       .append("g")
       .attr("transform", function (d, i) {
-        return "translate(" + (350) + "," + (i * 20 + 20) + ")";
+        return "translate(" + (600) + "," + (i * 20 + 20) + ")";
       })
       .attr("class", "legend");
 
