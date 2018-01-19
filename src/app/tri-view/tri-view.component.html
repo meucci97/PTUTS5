@@ -21,8 +21,24 @@
     </div>
 
   </form>
-  <br>
-  {{triSelect}}
-  <br>
-  {{triFusion}}
+
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Tri</th>
+          <th scope="col">Temps</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Tri fusion</th>
+          <td>{{ triFusion }}</td>
+        </tr>
+        <tr>
+          <th>Tri selection</th>
+          <td>{{ triSelect }}</td>
+        </tr>
+      </tbody>
+    </table>
+
 </div>

@@ -24,12 +24,12 @@ export class TriViewComponent implements OnInit {
   sendData(formData) {
     this._postService.getAccA(formData.limit).subscribe((data: any[]) => {
     console.log(data);
-    this.triFusion='Vitesse Tri par fusion '+data['sortedTime']+'ms';
+    this.triFusion=data['sortedTime']+'ms';
     console.log(this.triFusion);
     });
     this._postService.getAccB(formData.limit).subscribe((data: any[]) => {
       console.log(data);
-      this.triSelect='Vitesse Tri par selection '+data['sortedTime']+'ms';
+      this.triSelect=data['sortedTime']+'ms';
       console.log(this.triSelect);
       });
     
