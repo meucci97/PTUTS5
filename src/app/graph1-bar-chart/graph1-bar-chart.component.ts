@@ -9,7 +9,7 @@ import { PostsService } from '../posts/posts.service';
 })
 export class Graph1BarChartComponent implements OnInit {
 
-  titre = "Titre"
+  titre = "Heures"
   
   constructor(private _postService: PostsService) { }
 

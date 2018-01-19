@@ -1,0 +1,31 @@
+import { Component, OnInit, Output} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import { PostsService } from '../posts/posts.service';
+@Component({
+  selector: 'app-tri-view',
+  templateUrl: './tri-view.component.html',
+  styleUrls: ['./tri-view.component.css']
+})
+export class TriViewComponent implements OnInit {
+  titre = 'Tri';
+  LimitGroup: FormGroup;
+  triSelect: String;
+  triFusion: String;
+  constructor(private formBuilder: FormBuilder , private _postService: PostsService) { }
+
+  ngOnInit() {
+    this.triSelect='';
+    this.triFusion='';
+    this.LimitGroup = this.formBuilder.group({
+      limit: 10
+    });
+  }
+
+  sendData(formData) {
+    /*this._postService.getAcc(formData.limit).subscribe((data: any[]) => {
+    });*/
+    console.log(formData.limit);
+    this.triSelect='Vitesse Tri par selection';
+    this.triFusion='Vitesse Tri par fusion';
+    }
+}

@@ -16,8 +16,10 @@ export class PostsService {
       return this.http.get("/api/posts");
     }
 
-    getAcc(){
-      return this.http.get("/api/accidents");
+    getAcc(limit){
+      return this.http.get("/api/accidents", {
+        params: new HttpParams().set('dateEnd', limit).set('dateStart', limit),
+      });
     }
 
     getAccPieChart(dateStart, dateEnd) {

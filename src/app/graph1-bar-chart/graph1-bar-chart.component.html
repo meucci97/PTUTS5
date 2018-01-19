@@ -1,5 +1,10 @@
-<h1 class="text-center titre">{{ titre }}</h1>
+<div class="jumbotron">
+    <h1 class="display-4 text-center titre">{{ titre }}</h1>
+    <p class="lead text-center">Graphique montrant le nombre d'accidents avec la gravité en fonction de l'heure de la journée pour une période donnée</p>
+</div>
 
-<h3>Choix de la période</h3>
-<app-durationform (onDataload)="onDataload($event)"></app-durationform>
-<svg class="chartStackedNegative" ></svg>
+<div class="container">
+    <app-durationform (onDataload)="onDataload($event)"></app-durationform>
+
+    <svg class="chartStackedNegative"></svg>
+</div>
