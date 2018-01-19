@@ -10,7 +10,7 @@ import * as d3scale from 'd3-scale';
 })
 export class Graph3LineChartComponent implements OnInit {
  
-  titre = "Cummulé";
+  titre = "Cumulé";
  
   onDataload(myData: Array<any>) {
 

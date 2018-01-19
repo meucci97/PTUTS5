@@ -230,7 +230,7 @@ exports.graph2 = function (monthStart, monthEnd, years) {
 
 exports.graph3 = function (dateStart, dateEnd) {
   let query =
-    "SELECT caracteristique.NUM_ACC, INFRA " +
+    "SELECT caracteristique.NUM_ACC, CART " +
     "FROM caracteristique JOIN LIEUX ON CARACTERISTIQUE.NUM_ACC = LIEUX.NUM_ACC " +
     "WHERE " + durationCondition(dateStart, dateEnd);
 
