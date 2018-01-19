@@ -10,7 +10,7 @@ export class NavBarComponent implements OnInit {
   routes = [
     {path: 'pie-chart', name: 'Accidents/Régions'},
     {path: 'nbAccidentsParPeriode', name: "Accidents/Période"},
-    {path: 'nbAccidentsCumulParPeriode', name: 'Accidents Cummul/Période'},
+    {path: 'nbAccidentsCumulParPeriode', name: 'Accidents Cumul/Période'},
     {path: 'nbAccidentHeure', name:"Accidents/Heure"},
     {path: 'nbAccidentCollision', name:"Accidents/Collision"},
     {path: 'nbAccidentsInfrastructures', name: "Accidents/Infrastructures"},
