@@ -51,13 +51,13 @@ export class D3GraphComponent implements OnInit {
   scaleDate: Array<any>;
   ngOnInit() {
 
-    this._postService.getAcc().subscribe((data: any[]) => {
+    /*this._postService.getAcc().subscribe((data: any[]) => {
       // Read the result field from the JSON response.
       this.value = data['data'];
 
       //this.toto();
       //this.drawGraph('chart', this.tableTest2, this.tableAnne);
-    });
+    });*/
   }
   ngAfterViewInit() {
 

@@ -5,13 +5,13 @@
 
 <div class="container">
 
-  <form>
+  <form [formGroup]="LimitGroup" (ngSubmit)="sendData(LimitGroup.value)">
 
     <div class="form-row">
 
       <div class="form-group col-md-5">
         <label for="limit"><b>Limites</b></label>
-        <input class="form-control" type="text" id="limit" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+        <input class="form-control" type="text" id="limit" name="limit" [value]="limit.value" formControlName="limit" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
       </div>
 
       <div class="form-group col-md-2">
