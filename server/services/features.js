@@ -10,14 +10,14 @@ let collisions = {
   7:"Sans collision"
 };
 
-let infrastructures = {
-  1:"Souterrain - Tunnel",
-  2:"Pont",
-  3:"Bretelle d'échangeur ou de raccordement",
-  4:"Voie ferrée",
-  5:"Carrefour aménagé",
-  6:"Zone piétonne ",
-  7:"Zone de péage"
+let categories = {
+  1:"Autoroute",
+  2:"Route Nationale",
+  3:"Route Départementale",
+  4:"Voie Communale",
+  5:"Hors réseau public",
+  6:"Parc de stationnement ouvert à la circulation publique ",
+  9:"Autre"
 };
 
 let regions = [
@@ -1207,7 +1207,7 @@ exports.graph4 = function(dateStart, dateEnd) {
 exports.graph3 = function(dateStart, dateEnd) {
   return features.graph3(dateStart, dateEnd)
     .then(function(result){
-      return countByInfra(result.rows);
+      return countByCategories(result.rows);
     })
     .catch(function(err){
       return {"err": err};
@@ -1270,24 +1270,29 @@ function countByRegion (data) {
   return result;
 }
 
-function countByInfra (data) {
-  let result = [], filteredByInfra = [];
+function countByCategories (data) {
+  let result = [], filteredByCategorie = [];
   let i;
 
-  for (i = 0; i < 8; i++) {
-    filteredByInfra = data.filter(filterInfra(i));
-    result[i] = {
-      "label": infrastructures[i],
-      "count" : filteredByInfra.length
-    };
+  for (i = 1; i < 7; i++) {
+    filteredByCategorie = data.filter(filterCategories(i));
+    result.push({
+      "label": categories[i],
+      "count" : filteredByCategorie.length
+    });
   }
+  filteredByCategorie = data.filter(filterCategories(9));
+  result.push({
+    "label": categories[9],
+    "count" : filteredByCategorie.length
+  });
 
   return result;
 }
 
-function filterInfra(infra) {
+function filterCategories(categorie) {
   return function(item) {
-    return item["INFRA"] === infra;
+    return item["CART"] === categorie;
   };
 }
 
